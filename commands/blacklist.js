@@ -17,23 +17,30 @@ module.exports = {
         return msg.channel.send(`That user is already blacklisted`)
       }
       try {
-        const m = await msg.channel.send(`Are you sure you want to ban this user`)
+        const fetched = await client.users.fetch(id)
+        const m = await msg.channel.send(`Are you sure you want to blacklist **${fetched.tag}**`)
         m.react('✅')
         .then(m.react('❌'))
+        let confirmation;
 
         const filter = (reaction, user) => {
           return user.id === config.ownerID
         };
 
-        m.awaitReactions(filter, { max:1, time: 5000, errors: ['time'] })
+        await m.awaitReactions(filter, { max:1, time: 5000, errors: ['time'] })
     	  .then(collected => {
-          console.log(collected)
+          const reaction = collected.first()
+          if (reaction.emoji.name === `✅`) {
+            confirmation = true
+          } else {
+            confirmation = false
+          }
         })
 	      .catch(collected => {
-		      console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
+		      m.reactions.removeAll()
 	      });
 
-        const fetched = await client.users.fetch(id)
+        console.log(confirmation)
         //await blacklist.set(id, 'blacklist')
         //msg.channel.send(`Blacklisted **${fetched.tag}**`)
       } catch (e) {
