@@ -5,9 +5,14 @@ const client = new Discord.Client();
 const config = require('./config.json');
 let prefix = config.prefix;
 const status = { activity: { name: prefix + 'help', type: 'LISTENING' }, status: 'online' };
-const travisStatus = { activity: { name: `me run on Travis CI`, type: 'WATCHING' }, status: 'online' };
 const axios = require('axios');
 const chalk = require('chalk')
+const blapi = require('blapi')
+const Keyv = require('keyv');
+const blacklistCheck = require('./functions/checkBlacklist.js')
+let blacklist;
+
+//blapi.handle(client, apikeys, 120)
 
 // Makes a new collection with all the files in /commands
 
@@ -24,18 +29,20 @@ for (const file of commandFiles) {
 // Fires once the bot is ready and logs it to the console then sets it status
 
 client.on('ready', () => {
-  console.log(chalk.inverse(`INFO`), `Logged in as ${client.user.tag}!`);
+  console.log(chalk.yellow(`INFO`), `Logged in as ${client.user.tag}!`);
 
-  if (process.env.TRAVIS) {
-    client.user.setPresence(travisStatus)
-    .then(console.log(chalk.inverse(`INFO`), `Travis Status Set`))
+  client.user.setPresence(status)
+    .then(console.log(chalk.yellow(`INFO`), `Status Set`))
     .catch(console.error);
-  } else {
-    client.user.setPresence(status)
-    .then(console.log(chalk.inverse(`INFO`), `Status Set`))
-    .catch(console.error);
-  }
 });
+
+async function blacklistConnect() {
+  blacklist = await new Keyv('sqlite://databases/blacklist.sqlite');
+  blacklist.on('error', err => console.log(chalk.bgRedBright(`ERROR`), `Blacklist Database Connection Error`));
+  console.log(chalk.green(`SUCCESS`), `Connected to Blacklist Database`)
+}
+
+blacklistConnect()
 
 // Fires when a new message is received
 client.on('guildCreate', guild => {
@@ -80,16 +87,20 @@ client.on('guildDelete', guild => {
   }
 })
 
-client.on('message', msg => {
-  // Checks for mentions and if one includes the bot it sends a info message
+client.on('message', async msg => {
+  /* // Checks for mentions and if one includes the bot it sends a info message
   if (msg.mentions.has(client.user.id)) {
-    console.log(prefix)
+    blacklistCheck.check(msg, blacklist)
     if (msg.author.bot) return;
     msg.channel.send(`Hey, I'm ${client.user.username}. My prefix is \`${prefix}\``)
   }
-
+ */
   // If the command doesn't start with the prefix or is sent by a bot return
   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
+
+  const blacklisted = await blacklistCheck.check(msg, blacklist)
+  if (blacklisted) return;
+
   // Cuts off the prefix and .trim removes useless spaces .split seperates the string into words and puts it in a array
 
   const args = msg.content.slice(prefix.length).trim().split(/ +/);
@@ -122,12 +133,10 @@ client.on('message', msg => {
 
   if (command.guildOnly && !msg.guild) {
     return msg.channel.send(`This command does not work in private messages`)
-  } else if (!msg.guild.available) {
-    return msg.channel.send(`This guild is currently unavailable. Please try again later`)
   }
 
   try {
-    command.execute(msg, args, client, config, prefix, axios, Discord, avatar);
+    command.execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist);
   } catch (e) {
     const random = require('./functions/random-letters.js')
     const id = random.random(5)
@@ -137,18 +146,18 @@ client.on('message', msg => {
       .setDescription(`An error occured while attempting to run your command. Make sure I have the required permissions with \`${prefix}diagnose\`. If this continues happening please report this error ID to the [support server](https://dsc.gg/sea).`)
       .addField(`Error ID`, id)
     msg.channel.send(embed)
-    console.log(chalk.bgRedBright(`ERROR`) , `An error occured. Error ID: ${id}`)
+    console.log(chalk.red(`ERROR`), `An error occured. Error ID: ${id}`)
     const today = new Date()
-    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    let guildID = msg.guild.id;
-    let guildName = msg.guild.name;
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    let guildID;
+    let guildName;
 
-    if (!guildID) {
+    if (!msg.guild) {
       guildID = `This command wasn't run in a server`
-    }
-
-    if (!guildName) {
       guildName = `This command wasn't run in a server`
+    } else {
+      guildID = msg.guild.id
+      guildName = msg.guild.name
     }
 
     const file = JSON.stringify({
@@ -164,7 +173,7 @@ client.on('message', msg => {
         "name": msg.author.tag
       },
       "channelID": msg.channel.id,
-      "error": e.name + e.message
+      "error": e.name + ' ' + e.message
     })
 
 

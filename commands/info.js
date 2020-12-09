@@ -6,7 +6,8 @@ module.exports = {
   args: false,
   cooldown: 3,
   usage: '',
- execute(msg, args, client, config, prefix, axios, Discord, avatar) {
+  category: "info",
+ execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
     let oldEmbed =  {
         color: config.mainColor,
         title: `About Me`,

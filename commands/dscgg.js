@@ -1,12 +1,13 @@
 module.exports = {
   name: 'dscgg',
   description: 'Gets info on a [dsc.gg](https://dsc.gg) link.',
-  ownerOnly: false,
+  ownerOnly: true,
   guildOnly: false,
   args: true,
   cooldown: 3,
   usage: '<part after the links slash>',
-  execute(msg, args, client, config, prefix, axios, Discord, avatar) {
+  category: "utility",
+  execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
     const errors = require(`../snippets/dscgg.json`)
     const Link = require('dsc.js')
     const dscClient = new Link.Client({
@@ -14,7 +15,7 @@ module.exports = {
       version: 2
     })
 
-    client.fetchLink(args[0])
+    dscClient.fetchLink(args[0])
     .then((link) => {
       console.log(e)
     })

@@ -24,16 +24,16 @@ if (statcordToken) {
 }
 
 manager.on('shardCreate', shard => {
-  console.log(chalk.bgGreenBright(`SHARD`), `Launched Shard ${shard.id}`);
+  console.log(chalk.blue(`SHARD`), `Launched Shard ${shard.id}`);
 
   shard.on('death', shard => {
-    console.log(chalk.bgRedBright(`SHARD`), `Shard Died`)
+    console.log(chalk.red(`SHARD`), `Shard Died`)
   })
   shard.on('disconnect', shard => {
-    console.log(chalk.bgRedBright(`SHARD`), `Shard ${shard.id} Disconnected`)
+    console.log(chalk.red(`SHARD`), `Shard ${shard.id} Disconnected`)
   })
   shard.on('reconnecting', shard => {
-    console.log(chalk.bgRedBright(`SHARD`), `Shard ${shard.id} Reconnecting`)
+    console.log(chalk.red(`SHARD`), `Shard ${shard.id} Reconnecting`)
   })
 });
 
@@ -49,6 +49,6 @@ if (statcord) {
     // status = false if the post was successful
     // status = "Error message" or status = Error if there was an error
     if (!status) console.log("Successful post");
-    else console.error(status);
+    else console.error(`Error`);
   });
 }

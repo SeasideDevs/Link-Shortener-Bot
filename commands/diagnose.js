@@ -6,7 +6,8 @@ module.exports = {
   args: false,
   cooldown: 3,
   usage: '',
-  execute(msg, args, client, config, prefix, axios, Discord, avatar) {
+  category: "info",
+  execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
     let description = ``;
     let embed = new Discord.MessageEmbed()
     .setColor(config.mainColor)
@@ -16,13 +17,13 @@ module.exports = {
 
     if (msg.guild.me.hasPermission('ADMINISTRATOR')) {
       embed.setColor(config.mainColor)
-      description += `✅ I have all permissions required!`
+      embed.setDescription(`✅  I have all permissions required!`)
       return msg.channel.send(embed)
     }
     // Checks for Add Reactions permission
 
     if (msg.guild.me.hasPermission('ADD_REACTIONS')) {
-      description += `\n✅ Add Reactions`
+      description += `\n✅  Add Reactions`
     } else {
       description += `\n<:deny:779782129890361354> Add Reactions`
     }
@@ -30,7 +31,7 @@ module.exports = {
     // Checks for View Channel permission
 
      if (msg.guild.me.hasPermission('VIEW_CHANNEL')) {
-      description += `\n✅ View Channel`
+      description += `\n✅  View Channel`
     } else {
       description += `\n<:deny:779782129890361354> View Channel`
     }
@@ -38,7 +39,7 @@ module.exports = {
     // Checks for Send Messages permission
 
      if (msg.guild.me.hasPermission('SEND_MESSAGES')) {
-      description += `\n✅ Send Messages`
+      description += `\n✅  Send Messages`
     } else {
       description += `\n<:deny:779782129890361354> Send Messages`
     }
@@ -46,7 +47,7 @@ module.exports = {
     // Checks for Embed Links permission
 
      if (msg.guild.me.hasPermission('EMBED_LINKS')) {
-      description += `\n✅ Embed Links`
+      description += `\n✅  Embed Links`
     } else {
       description += `\n<:deny:779782129890361354> Embed Links`
     }
@@ -54,7 +55,7 @@ module.exports = {
     // Checks for Read Message History permission
 
      if (msg.guild.me.hasPermission('READ_MESSAGE_HISTORY')) {
-      description += `\n✅ Read Message History`
+      description += `\n✅  Read Message History`
     } else {
       description += `\n<:deny:779782129890361354> Read Message History`
     }
@@ -62,7 +63,7 @@ module.exports = {
     // Checks for External Emojis permission
 
      if (msg.guild.me.hasPermission('USE_EXTERNAL_EMOJIS')) {
-      description += `\n✅ External Emojis`
+      description += `\n✅  External Emojis`
     } else {
       description += `\n<:deny:779782129890361354> External Emojis`
     }
