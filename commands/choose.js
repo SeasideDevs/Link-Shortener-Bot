@@ -10,6 +10,9 @@ module.exports = {
     execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
         const joined = args.join(' ')
         const split = joined.split('|')
+        if (split.length > 10) {
+          return msg.channel.send(`Seashell can only choose from a max of 10 options`)
+        }
         const min = 0
         const max = split.length - 1
         let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
