@@ -9,26 +9,21 @@ module.exports = {
     category: "utility",
     execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
         let link = encodeURIComponent(args[0], msg)
+        let embed = new Discord.MessageEmbed()
         const errors = require(`../snippets/vgd.json`)
 
         axios.get(`https://v.gd/create.php?format=simple&url=${link}`)
             .then(function(response) {
                 // handle success
-                let embed = {
-                    color: config.mainColor,
-                    title: `Link`,
-                    description: `[${response.data}](${response.data})`,
-                    author: {
-                        name: `Success`,
-                        icon_url: avatar
-                    }
-                }
+                embed.setColor(config.mainColor)
+                embed.setAuthor(`Success`, avatar)
+                embed.setTitle(`Link`)
+                embed.setDescription(`${response.data}`)
 
                 msg.channel.send({
-                    embed: embed
+                    embed
                 })
                 msg.react(config.successEmoji)
-                console.log(response)
             })
             .catch(function(error) {
                 // handle error
@@ -37,33 +32,24 @@ module.exports = {
                 //console.log(error.response.data)
 
                 if (error.response.data === errors.vgdInvalid) {
-                    let embed = {
-                        color: config.errorColor,
-                        title: `Invalid URL`,
-                        description: `Please try again with a valid URL`,
-                        author: {
-                            name: `Error`,
-                            icon_url: avatar
-                        }
-                    }
+                  const embed = new Discord.MessageEmbed()
+                  .setColor(config.errorColor)
+                  .setAuthor(`Invalid URL`, avatar)
+                  .setDescription(`Please try again with a valid URL`)
 
                     msg.channel.send({
-                        embed: embed
+                        embed
                     })
 
                 } else if (error.response.data === errors.vgdBlacklisted) {
-                    let embed = {
-                        color: config.errorColor,
-                        title: `Blacklisted URL`,
-                        description: `This URL has been blacklisted. This can happen when it has been abused in the past or leads to URL shortner`,
-                        author: {
-                            name: `Error`,
-                            icon_url: avatar
-                        }
-                    }
+                  const embed = new Discord.MessageEmbed()
+                  .setColor(config.errorColor)
+                  .setAuthor(`Blacklisted URL`, avatar)
+                  .setDescription(`This URL has been blacklisted. This can happen when it has been abused in the past or leads to another URL shortner`)
+
                     msg.react(config.errorEmoji)
                     msg.channel.send({
-                        embed: embed
+                        embed
                     })
                 }
             })
