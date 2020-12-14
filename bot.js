@@ -36,13 +36,13 @@ client.on('ready', () => {
     .catch(console.error);
 });
 
-async function blacklistConnect() {
+/* async function blacklistConnect() {
   blacklist = await new Keyv('sqlite://databases/blacklist.sqlite');
   blacklist.on('error', err => console.log(chalk.bgRedBright(`ERROR`), `Blacklist Database Connection Error`));
   console.log(chalk.green(`SUCCESS`), `Connected to Blacklist Database`)
 }
 
-blacklistConnect()
+blacklistConnect() */
 
 // Fires when a new message is received
 client.on('guildCreate', guild => {
@@ -98,8 +98,8 @@ client.on('message', async msg => {
   // If the command doesn't start with the prefix or is sent by a bot return
   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
-  const blacklisted = await blacklistCheck.check(msg, blacklist)
-  if (blacklisted) return;
+  /* const blacklisted = await blacklistCheck.check(msg, blacklist)
+  if (blacklisted) return; */
 
   // Cuts off the prefix and .trim removes useless spaces .split seperates the string into words and puts it in a array
 

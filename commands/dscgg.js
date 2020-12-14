@@ -10,22 +10,49 @@ module.exports = {
   execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
     const errors = require(`../snippets/dscgg.json`)
     const Link = require('dsc.js')
-    const dscgg = new Link.Client({
-      api_key: process.env.DSCGG_TOKEN,
-      version: 2
-    })
+    const dscgg = new Link.Client(process.env.DSCGG_TOKEN)
+    const input = args[0]
+    if (input.length > 25) {
+      return msg.channel.send(`You cannot lookup links longer than 25 characters`)
+    }
 
-    console.log(args)
-    dscgg.fetchLink(args[0])
-    .then((link) => {
-      console.log(link)
-      const embed = new Discord.MessageEmbed()
-    })
-    .catch((error) => {
-      console.log(error)
-      msg.channel.send(`There was an error getting your link. Make sure you used a valid [dsc.gg](https://dsc.gg) link`)
-    })
+    const upperCase = (type) => {
+      let letters = type.split(``)
+      // removes first item from array future me
+      const firstLetter = letters[0]
+      letters.shift()
+      letters.unshift(firstLetter.toUpperCase())
+      return letters.join(``)
+    }
 
+    async function run() {
+      const data = await dscgg.fetchLink(input)
+      if (!data.success) {
+        if (data.code === errors.notfound) {
+          msg.channel.send(`That link does not exist`)
+        } else if (data.code === errors.protected) {
+          msg.channel.send(`You cannot see info about this link as its password protected`)
+        } else {
+          msg.channel.send(`There was an error fetching that link`)
+        }
+        return;
+      }
+      const owner = await client.users.fetch(data.payload.owner)
+      const type = await upperCase(data.payload.type)
+      const embed = await new Discord.MessageEmbed()
+      .setColor(config.mainColor)
+      .setAuthor(data.payload.id)
+      .setThumbnail(data.payload.meta.image)
+      .addField(`Owner:`, `**Username:** ${owner.tag}`)
+      .addField(`Info:`, `**Type:** ${type}\n**Redirect:** ||${data.payload.redirect}||`)
+      .addField(`Stats:`, `placeholder`)
+      .addField(`Embed:`, `placeholdetr`)
+    
+      msg.channel.send(embed)
+      console.log(owner)
+      console.log(data)
+    }
 
+    run()
   }
 }
