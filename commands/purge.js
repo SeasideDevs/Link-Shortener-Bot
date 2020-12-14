@@ -9,14 +9,13 @@ module.exports = {
   category: "moderation",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
     const amount = parseInt(args[0]);
-    if (amount > 100) {
-      return msg.channel.send(`You can only delete up to 100 messages`)
-    }
+    
     msg.delete()
-    msg.channel.bulkDelete(amount, true)
-    .then(function (messages) {
-      async function run() {
+    const bulkDelete = (amount) => {
+      msg.channel.bulkDelete(amount, true)
+      .then(async function (messages) {
         let m;
+        // This if else checks if the amount is more than 1 and updates the message to be plural
         if (amount === 1) {
           m = await msg.channel.send(`Deleted ${messages.size} message`)
         } else {
@@ -24,10 +23,17 @@ module.exports = {
         }
         m.react('785686207597379615')
         m.delete({timeout: 5000})
+    
+      })
+      .catch(console.error);
+    }
+
+    const checkAmount = () => {
+      if (amount > 100) {
+        amount -= 100;
+        bulkDelete(100)
       }
-      run()
-    })
-  .catch(console.error);
+    }
 
   }
 }
