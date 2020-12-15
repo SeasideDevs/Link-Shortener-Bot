@@ -45,7 +45,7 @@ module.exports = {
                 .setThumbnail(data.payload.meta.image)
                 .addField(`Owner:`, `**Username:** ${owner.tag}`)
                 .addField(`Info:`, `**Type:** ${type}\n**Redirect:** ||${data.payload.redirect}||`)
-                .addField(`Stats:`, `placeholder`)
+                .addField(`Stats:`, `****`)
                 .addField(`Embed:`, `placeholdetr`)
 
             msg.channel.send(embed)
