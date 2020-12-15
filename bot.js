@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { MongoClient} = require('mongodb');
 const Discord = require('discord.js');
 const Statcord = require("statcord.js");
 const client = new Discord.Client();
@@ -8,9 +9,6 @@ const status = { activity: { name: prefix + 'help', type: 'LISTENING' }, status:
 const axios = require('axios');
 const chalk = require('chalk')
 const blapi = require('blapi')
-const Keyv = require('keyv');
-const blacklistCheck = require('./functions/checkBlacklist.js')
-let blacklist;
 
 //blapi.handle(client, apikeys, 120)
 
@@ -36,13 +34,6 @@ client.on('ready', () => {
     .catch(console.error);
 });
 
-/* async function blacklistConnect() {
-  blacklist = await new Keyv('sqlite://databases/blacklist.sqlite');
-  blacklist.on('error', err => console.log(chalk.bgRedBright(`ERROR`), `Blacklist Database Connection Error`));
-  console.log(chalk.green(`SUCCESS`), `Connected to Blacklist Database`)
-}
-
-blacklistConnect() */
 
 // Fires when a new message is received
 client.on('guildCreate', guild => {
