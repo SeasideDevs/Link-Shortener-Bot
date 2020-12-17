@@ -1,10 +1,13 @@
 const fs = require('fs');
 const { MongoClient} = require('mongodb');
+const db = new MongoClient(process.env.DB_URL, {userUnifiedTopology: true});
+let collection;
+let database;
 const Discord = require('discord.js');
 const Statcord = require("statcord.js");
 const client = new Discord.Client();
 const config = require('./config.json');
-let prefix = config.prefix;
+const prefix = config.prefix;
 const status = { activity: { name: prefix + 'help', type: 'LISTENING' }, status: 'online' };
 const axios = require('axios');
 const chalk = require('chalk')
@@ -25,6 +28,26 @@ for (const file of commandFiles) {
 }
 
 // Fires once the bot is ready and logs it to the console then sets it status
+async function dbConnect() {
+  try {
+    await client.connect();
+
+    database = client.db('databases');
+    collection = database.collection('guilds');
+
+    // Query for a movie that has the title 'Back to the Future'
+    //const query = { title: 'Back to the Future' };
+    //const movie = await collection.findOne(query);
+
+    //console.log(movie);
+  } catch (e) {
+      console.log(e)
+  } finally {
+    console.log(`done`)
+    // Ensures that the client will close when you finish/error
+    //await client.close();
+  }
+}
 
 client.on('ready', () => {
   console.log(chalk.yellow(`INFO`), `Logged in as ${client.user.tag}!`);
@@ -79,22 +102,24 @@ client.on('guildDelete', guild => {
 })
 
 client.on('message', async msg => {
-  /* // Checks for mentions and if one includes the bot it sends a info message
-  if (msg.mentions.has(client.user.id)) {
-    blacklistCheck.check(msg, blacklist)
-    if (msg.author.bot) return;
-    msg.channel.send(`Hey, I'm ${client.user.username}. My prefix is \`${prefix}\``)
+  /* if (!msg.guild) {
+    guildPrefix = prefix
+  } else {
+    const query = {id: msg.guild.id}
+    const data = collection.findOne(query)
+    if (!data) {
+      
+    }
   }
  */
+  guildPrefix = prefix
   // If the command doesn't start with the prefix or is sent by a bot return
-  if (!msg.content.startsWith(prefix) || msg.author.bot) return;
-
-  /* const blacklisted = await blacklistCheck.check(msg, blacklist)
-  if (blacklisted) return; */
+  
+  if (!msg.content.startsWith(guildPrefix) || msg.author.bot) return;
 
   // Cuts off the prefix and .trim removes useless spaces .split seperates the string into words and puts it in a array
 
-  const args = msg.content.slice(prefix.length).trim().split(/ +/);
+  const args = msg.content.slice(guildPrefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
 
   if (!client.commands.has(commandName)) return;
@@ -110,7 +135,7 @@ client.on('message', async msg => {
     let message = `You are missing some required arguments`
 
     if (command.usage) {
-      message += ` The correct usage is \`${prefix}${command.name} ${command.usage}\``
+      message += ` The correct usage is \`${guildPrefix}${command.name} ${command.usage}\``
     }
 
     let embed = new Discord.MessageEmbed()
@@ -127,14 +152,14 @@ client.on('message', async msg => {
   }
 
   try {
-    command.execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist);
+    command.execute(msg, args, client, config, guildPrefix, axios, Discord, avatar);
   } catch (e) {
     const random = require('./functions/random-letters.js')
     const id = random.random(5)
     const embed = new Discord.MessageEmbed()
       .setColor(config.errorColor)
       .setAuthor(`Error`, avatar)
-      .setDescription(`An error occured while attempting to run your command. Make sure I have the required permissions with \`${prefix}diagnose\`. If this continues happening please report this error ID to the [support server](https://dsc.gg/sea).`)
+      .setDescription(`An error occured while attempting to run your command. Make sure I have the required permissions with \`${guildPrefix}diagnose\`. If this continues happening please report this error ID to the [support server](https://dsc.gg/sea).`)
       .addField(`Error ID`, id)
     msg.channel.send(embed)
     console.log(chalk.red(`ERROR`), `An error occured. Error ID: ${id}`)
