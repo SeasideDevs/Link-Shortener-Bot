@@ -40,14 +40,18 @@ module.exports = {
             const owner = await client.users.fetch(data.payload.owner)
             const type = await upperCase(data.payload.type)
             const link = await upperCase(data.payload.id)
+            let redirect = await `||${data.payload.redirect}||`
+            if (type === 'Bot') {
+              redirect =  `Redirect link is too long. Click [here](${data.payload.redirect}) instead`
+            }
             const embed = await new Discord.MessageEmbed()
-                .setColor(config.mainColor)
+                .setColor(data.payload.meta.color)
                 .setTitle(link)
                 .setThumbnail(data.payload.meta.image)
-                .addField(`Owner:`, `**Username:** ${owner.tag}`)
-                .addField(`Info:`, `**Type:** ${type}\n**Redirect:** ||${data.payload.redirect}||`)
-                .addField(`Stats:`, `**Clicks:** ${data.payload.stats.clicks}\n**Unique Clicks:** ${data.payload.stats.unique_clicks}`)
-                .addField(`Embed:`, `placeholdetr`)
+                .addField(`👑  Owner:`, `**Username:** ${owner.tag}`)
+                .addField(`📢  Info:`, `**Type:** ${type}\n**Redirect:** ${redirect}`)
+                .addField(`📊  Stats:`, `**Clicks:** ${data.payload.stats.clicks}\n**Unique Clicks:** ${data.payload.stats.unique_clicks}`)
+                .addField(`📗  Embed:`, `placeholdetr`)
 
             msg.channel.send(embed)
             console.log(owner)
