@@ -40,6 +40,7 @@ module.exports = {
             const owner = await client.users.fetch(data.payload.owner)
             const type = await upperCase(data.payload.type)
             const link = await upperCase(data.payload.id)
+            let color = data.payload.meta.color.replace(`#`, ``)
             let redirect = await `||${data.payload.redirect}||`
             if (type === 'Bot') {
               redirect =  `Redirect link is too long. Click [here](${data.payload.redirect}) instead`
@@ -51,7 +52,7 @@ module.exports = {
                 .addField(`👑  Owner:`, `**Username:** ${owner.tag}`)
                 .addField(`📢  Info:`, `**Type:** ${type}\n**Redirect:** ${redirect}`)
                 .addField(`📊  Stats:`, `**Clicks:** ${data.payload.stats.clicks}\n**Unique Clicks:** ${data.payload.stats.unique_clicks}`)
-                .addField(`📗  Embed:`, `placeholdetr`)
+                .addField(`📗  Embed:`, `**Color:** [${data.payload.meta.color}](https://dummyimage.com/1000x1000/${color}/${color})\n**Image:** Click [here](${data.payload.meta.image})`)
 
             msg.channel.send(embed)
             console.log(owner)
