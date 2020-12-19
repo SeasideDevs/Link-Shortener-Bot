@@ -1,7 +1,7 @@
 module.exports = {
     name: 'stats',
     description: 'Shows bot statistics',
-    ownerOnly: true,
+    ownerOnly: false,
     guildOnly: false,
     args: false,
     cooldown: 10,

@@ -47,7 +47,7 @@ module.exports = {
             }
             const embed = await new Discord.MessageEmbed()
                 .setColor(data.payload.meta.color)
-                .setTitle(link)
+                .setTitle(`Info for Link: **${link}**`)
                 .setThumbnail(data.payload.meta.image)
                 .addField(`👑  Owner:`, `**Username:** ${owner.tag}`)
                 .addField(`📢  Info:`, `**Type:** ${type}\n**Redirect:** ${redirect}`)
@@ -55,8 +55,6 @@ module.exports = {
                 .addField(`📗  Embed:`, `**Color:** [${data.payload.meta.color}](https://dummyimage.com/1000x1000/${color}/${color})\n**Image:** Click [here](${data.payload.meta.image})`)
 
             msg.channel.send(embed)
-            console.log(owner)
-            console.log(data)
         }
 
         run()
