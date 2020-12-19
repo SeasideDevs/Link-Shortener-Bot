@@ -8,33 +8,57 @@ module.exports = {
     usage: '<question>',
     category: "utility",
     execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
-      async function run() {
-      const subcommands = ['material']
-      if (subcommands[0] === args[0]) {
-        args.shift()
-        const embed = new Discord.MessageEmbed()
-        .setColor(config.mainColor)
-        .setAuthor(`New Poll by ${msg.author.tag}!`, avatar)
-        .setDescription(`${args.join(" ")}?`)
-        .setFooter(`Vote by clicking one of the reactions below!`)
+        async function run() {
+            let embed = new Discord.MessageEmbed()
+                .setColor(config.mainColor)
+                .setAuthor(`New Poll by ${msg.author.tag}!`, avatar)
+                .setFooter(`Vote by clicking one of the reactions below!`)
+            const subcommands = ['material', 'redtriangle', 'bluetriangle', 'bluearrows', 'block']
+            if (subcommands[0] === args[0]) {
+                args.shift()
+                embed.setDescription(`${args.join(" ")}`)
 
-        const m = await msg.channel.send(embed)
-        m.react('787095063649321021')
-        m.react('787095093323890698')
-      } else {
-          const embed = new Discord.MessageEmbed()
-          .setColor(config.mainColor)
-          .setAuthor(`New Poll by ${msg.author.tag}!`, avatar)
-          .setDescription(`${args.join(" ")}?`)
-          .setFooter(`Vote by clicking one of the reactions below!`)
+                const m = await msg.channel.send(embed)
+                m.react('787095063649321021')
+                m.react('787095093323890698')
+            } else if (subcommands[1] === args[0]) {
+                args.shift()
+                embed.setDescription(`${args.join(" ")}`)
 
-          const m = await msg.channel.send(embed)
-          m.react('👍')
-          m.react('👎')
-      }
-      
+                const m = await msg.channel.send(embed)
+                m.react('🔺')
+                m.react('🔻')
+            } else if (subcommands[2] === args[0]) {
+                args.shift()
+                embed.setDescription(`${args.join(" ")}`)
+
+                const m = await msg.channel.send(embed)
+                m.react('🔼')
+                m.react('🔽')
+            } else if (subcommands[3] === args[0]) {
+                args.shift()
+                embed.setDescription(`${args.join(" ")}`)
+
+                const m = await msg.channel.send(embed)
+                m.react('⬆️')
+                m.react('⬇️')
+            } else if (subcommands[4] === args[0]) {
+                args.shift()
+                embed.setDescription(`${args.join(" ")}`)
+
+                const m = await msg.channel.send(embed)
+                m.react('🟩')
+                m.react('🟥')
+            } else {
+                embed.setDescription(`${args.join(" ")}`)
+
+                const m = await msg.channel.send(embed)
+                m.react('👍')
+                m.react('👎')
+            }
+
+        }
+
+        run()
     }
-
-    run()
-  } 
 }
