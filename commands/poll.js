@@ -1,6 +1,6 @@
 module.exports = {
     name: 'poll',
-    description: 'I think this one is fucking obvious too',
+    description: 'Starts a simple yes/no poll. You can change the reactions used by adding either material, redtriangle, bluetriangle, bluearrows, block as the first argument',
     ownerOnly: false,
     guildOnly: true,
     args: true,
