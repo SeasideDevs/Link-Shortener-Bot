@@ -13,7 +13,7 @@ module.exports = {
                 .setColor(config.mainColor)
                 .setAuthor(`New Poll by ${msg.author.tag}!`, avatar)
                 .setFooter(`Vote by clicking one of the reactions below!`)
-            const subcommands = ['material', 'redtriangle', 'bluetriangle', 'bluearrows', 'block']
+            const subcommands = ['material', 'redtriangle', 'bluetriangle', 'bluearrows', 'block', 'Green45DegreeSmallLineWhite45DegreeInversedMediumLineWhiteGreenBackground&&Red45DegreeMediumLineWhiteRed45DegreeInversedMediumLineWhiteRedBackground_Icons']
             if (subcommands[0] === args[0]) {
                 args.shift()
                 embed.setDescription(`${args.join(" ")}`)
@@ -49,6 +49,13 @@ module.exports = {
                 const m = await msg.channel.send(embed)
                 m.react('🟩')
                 m.react('🟥')
+            } else if (subcommands[5] === args[0]) {
+                args.shift()
+                embed.setDescription(`${args.join(" ")}`)
+
+                const m = await msg.channel.send(embed)
+                m.react('787095063649321021')
+                m.react('787095093323890698')
             } else {
                 embed.setDescription(`${args.join(" ")}`)
 
