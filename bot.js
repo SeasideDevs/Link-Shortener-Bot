@@ -30,10 +30,9 @@ for (const file of commandFiles) {
 // Fires once the bot is ready and logs it to the console then sets it status
 async function dbConnect() {
   try {
-    await client.connect();
+    await db.connect({ useUnifiedTopology: true });
 
-    database = client.db('databases');
-    collection = database.collection('guilds');
+    database = await db.db('databases');
 
     // Query for a movie that has the title 'Back to the Future'
     //const query = { title: 'Back to the Future' };
@@ -48,6 +47,8 @@ async function dbConnect() {
     //await client.close();
   }
 }
+
+dbConnect()
 
 client.on('ready', () => {
   console.log(chalk.yellow(`INFO`), `Logged in as ${client.user.tag}!`);
@@ -105,16 +106,21 @@ client.on('message', async msg => {
   if (msg.content === `<@!${client.user.id}>`) {
     msg.channel.send(`Hey I'm ${client.user.username}! My prefix is ${prefix}.`)
   }
-  /* if (!msg.guild) {
+
+  if (!msg.guild) {
     guildPrefix = prefix
   } else {
     const query = {id: msg.guild.id}
+    database = db.db('databases');
+    const collection = database.collection('guilds');
     const data = collection.findOne(query)
     if (!data) {
-      
+      console.log(`no prefix lul`)
+    } else {
+      console.log(data)
     }
   }
- */
+
   guildPrefix = prefix
   // If the command doesn't start with the prefix or is sent by a bot return
   
