@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { MongoClient} = require('mongodb');
-const db = new MongoClient(process.env.DB_URL, {userUnifiedTopology: true});
+const db = new MongoClient(process.env.DB_URL, {useUnifiedTopology: true});
 let collection;
 let database;
 const Discord = require('discord.js');
@@ -30,7 +30,7 @@ for (const file of commandFiles) {
 // Fires once the bot is ready and logs it to the console then sets it status
 async function dbConnect() {
   try {
-    await db.connect({ useUnifiedTopology: true });
+    await db.connect();
 
     database = await db.db('databases');
 
@@ -110,18 +110,22 @@ client.on('message', async msg => {
   if (!msg.guild) {
     guildPrefix = prefix
   } else {
-    const query = {id: msg.guild.id}
-    database = db.db('databases');
+    const query = {guildID: msg.guild.id}
+    database = db.db('database');
     const collection = database.collection('guilds');
-    const data = collection.findOne(query)
+    const data = await collection.findOne(query)
     if (!data) {
-      console.log(`no prefix lul`)
+      console.log(`do data lul`)
+      guildPrefix = prefix
     } else {
-      console.log(data)
+      if (!data.prefix) {
+        guildPrefix = prefix
+      } else {
+        guildPrefix = data.prefix
+      }
+
     }
   }
-
-  guildPrefix = prefix
   // If the command doesn't start with the prefix or is sent by a bot return
   
   if (!msg.content.startsWith(guildPrefix) || msg.author.bot) return;
