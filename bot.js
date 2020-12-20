@@ -102,6 +102,9 @@ client.on('guildDelete', guild => {
 })
 
 client.on('message', async msg => {
+  if (msg.content === `<@!${client.user.id}>`) {
+    msg.channel.send(`Hey I'm ${client.user.username}! My prefix is ${prefix}.`)
+  }
   /* if (!msg.guild) {
     guildPrefix = prefix
   } else {
