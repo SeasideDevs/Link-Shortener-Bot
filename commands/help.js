@@ -17,6 +17,7 @@ module.exports = {
                 .setColor(config.mainColor)
             // Here we declare the arrays were the commands will be sorted into
             let owner = []
+            let admin = []
             let info = []
             let moderation = []
             let fun = []
@@ -31,6 +32,10 @@ module.exports = {
                 if (command.ownerOnly) {
                     owner.push(command.name)
                     command.category = `no`
+                }
+
+                if (command.category === `admin`) {
+                    admin.push(command.name)
                 }
 
                 if (command.category === `info`) {
@@ -61,12 +66,17 @@ module.exports = {
                 embed.addField(`Owner`, ownerJoined)
             }
             // This basiclly joins the array containing the commands in that category and puts a backtick around the the joined array so it's in a codeblock when sent to Discord
+            let adminJoined = `\`${admin.join(" ")}\``;
             let infoJoined = `\`${info.join(" ")}\``;
             let moderationJoined = `\`${moderation.join(" ")}\``;
             let funJoined = `\`${fun.join(" ")}\``;
             let utilityJoined = `\`${utility.join(" ")}\``;
 
             // These if statements check if the arrays were emphty after being sorted if so the descriptiond of that categories field gets set to a different message stating that the category has no commands
+            if (admin.length === 0) {
+                adminJoined = `No Commands In This Category`
+            }
+
             if (info.length === 0) {
                 infoJoined = `No Commands In This Category`
             }
@@ -83,6 +93,7 @@ module.exports = {
             }
 
             // This part makes the categories using the strings generated before
+            embed.addField(`Admin`, adminJoined)
             embed.addField(`Info`, infoJoined)
             embed.addField(`Moderation`, moderationJoined)
             embed.addField(`Fun`, funJoined)
