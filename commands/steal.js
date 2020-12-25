@@ -32,7 +32,7 @@ module.exports = {
           }
 
           if (normalMatch) {
-            const id = normalMatch[0].match(idPattern)
+            const id = emote.match(idPattern)
             let name = normalMatch[0].replace('<:', '')
             name = name.replace(':', '')
             normal.push({
@@ -43,7 +43,7 @@ module.exports = {
           }
 
           if (animatedMatch) {
-            const id = animatedMatch[0].match(idPattern)
+            const id = emote.match(idPattern)
             let name = animatedMatch[0].replace('<a:', '')
             name = name.replace(':', '')
             animated.push({
