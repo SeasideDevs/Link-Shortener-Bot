@@ -52,18 +52,24 @@ module.exports = {
               animated: true
             })
           }
-          console.log(`test`)
+        }
+
+        
+        for (const emote of normal) {
+          msg.guild.emojis.create(`https://cdn.discordapp.com/emojis/${emote.id}.png`, emote.name, {
+            reason: `Created with ${client.user.tag} using the steal command. This command was run by ${msg.author.tag}(${msg.author.id})`
+          })
+        }
+
+        for (const emote of animated) {
+          msg.guild.emojis.create(`https://cdn.discordapp.com/emojis/${emote.id}.gif`, emote.name, {
+            reason: `Created with ${client.user.tag} using the steal command. This command was run by ${msg.author.tag}(${msg.author.id})`
+          })
         }
 
         console.log(normal)
         console.log(animated)
-        const embed = new Discord.MessageEmbed()
-        .setColor(config.mainColor)
-        .setTitle(`Emote Results`)
-        .addField(`Total Emotes:`, `${emotes.length}`)
-        .addField(`Emotes`, ` \`\`\`${emotes.join("\n\\")}\`\`\` `)
 
-
-        msg.channel.send(embed)
+        msg.channel.send(`was tired of seeing that stupid embed so i made it go brrrrrrrrr`)
     }
 }
