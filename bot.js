@@ -2,12 +2,8 @@ const Sentry = require('@sentry/node')
 const Tracing = require('@sentry/tracing')
 Sentry.init({
     dsn: process.env.SENTRY_TOKEN,
-
-  // We recommend adjusting this value in production, or using tracesSampler
-  // for finer control
-  tracesSampleRate: 1.0,
+    tracesSampleRate: 1.0,
 });
-
 const fs = require('fs');
 const { MongoClient } = require('mongodb');
 const db = new MongoClient(process.env.DB_URL, {useUnifiedTopology: true});
