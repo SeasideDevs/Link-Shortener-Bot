@@ -9,10 +9,10 @@ module.exports = {
     category: "fun",
     execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
         const limit = 100;
-        const emotePattern = /<(a|):[A-z]{1,32}:[0-9]{18}>/g
+        const emotePattern = /<(a|):[0-z]{1,32}:[0-9]{18}>/g
         const idPattern = /[0-9]{18}/g
-        const namePattern = /<:[A-z]{1,32}:/g
-        const animatedNamePattern = /<a:[A-z]{1,32}:/g
+        const namePattern = /<:[0-z]{1,32}:/g
+        const animatedNamePattern = /<a:[0-z]{1,32}:/g
 
         const emotes = msg.content.match(emotePattern);
         if (!emotes) {
