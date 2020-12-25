@@ -4,6 +4,8 @@
   "description": "Link Shortener is a bot meant to help with shortening links on Discord. Soon to be a multipurpose bot",
   "main": "index.js",
   "dependencies": {
+    "@sentry/node": "^5.29.2",
+    "@sentry/tracing": "^5.29.2",
     "axios": "^0.20.0",
     "blapi": "^2.0.1",
     "chalk": "^4.1.0",

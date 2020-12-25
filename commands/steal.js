@@ -19,6 +19,10 @@ module.exports = {
           return msg.channel.send(`Sorry but I cannot steal more than ${limit} emotes at once. Please try again with 10 or less emotes`)
         }
 
+        for (const emote of emotes) {
+          
+        }
+
         console.log(emotes)
         const embed = new Discord.MessageEmbed()
         .setColor(config.mainColor)
