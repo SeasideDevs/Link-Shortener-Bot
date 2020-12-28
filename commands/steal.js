@@ -27,12 +27,6 @@ module.exports = {
         for (const emote of emotes) {
           const normalMatch = emote.match(namePattern)
           const animatedMatch = emote.match(animatedNamePattern)
-          if (!normalMatch) {
-            console.log(`e`)
-          }
-          if (!animatedMatch) {
-            console.log(`a`)
-          }
 
           if (normalMatch) {
             const id = emote.match(idPattern)

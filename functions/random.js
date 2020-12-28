@@ -1,5 +1,5 @@
 module.exports = {
-  random(length) {
+  generateString(length) {
     if (isNaN(length)) {
       throw new TypeError(`"length" should be a number`)
     }

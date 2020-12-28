@@ -37,18 +37,13 @@ for (const file of commandFiles) {
 async function dbConnect() {
   try {
     await db.connect();
-
     database = await db.db('databases');
-
-    // Query for a movie that has the title 'Back to the Future'
-    //const query = { title: 'Back to the Future' };
-    //const movie = await collection.findOne(query);
-
-    //console.log(movie);
+    chalk.yellow(`INFO`), `Connected to database`
   } catch (e) {
       console.log(e)
+      chalk.red('ERROR'), `Logged in as ${client.user.tag}!`
   } finally {
-    console.log(`done`)
+    //console.log(`done`)
     // Ensures that the client will close when you finish/error
     //await client.close();
   }
@@ -173,50 +168,8 @@ client.on('message', async msg => {
   try {
     command.execute(msg, args, client, config, guildPrefix, axios, Discord, avatar);
   } catch (e) {
-    const random = require('./functions/random-letters.js')
-    const id = random.random(5)
-    const embed = new Discord.MessageEmbed()
-      .setColor(config.errorColor)
-      .setAuthor(`Error`, avatar)
-      .setDescription(`An error occurred while attempting to run your command. Make sure I have the required permissions with \`${guildPrefix}diagnose\`. If this continues happening please report this error ID to the [support server](https://dsc.gg/sea).`)
-      .addField(`Error ID`, id)
-    msg.channel.send(embed)
-    console.log(chalk.red(`ERROR`), `An error occurred. Error ID: ${id}`)
-    const today = new Date()
-    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    let guildID;
-    let guildName;
-
-    if (!msg.guild) {
-      guildID = `This command wasn't run in a server`
-      guildName = `This command wasn't run in a server`
-    } else {
-      guildID = msg.guild.id
-      guildName = msg.guild.name
-    }
-
-    const file = JSON.stringify({
-      "id": id,
-      "message": msg.content,
-      "date": date,
-      "guild": {
-        "ID": guildID,
-        "name": guildName
-      },
-      "author": {
-        "ID": msg.author.id,
-        "name": msg.author.tag
-      },
-      "channelID": msg.channel.id,
-      "error": e.name + ' ' + e.message
-    })
-
-
-    console.log(e)
-    fs.writeFile(`errors/${id}.txt`, file, function(err) {
-      return
-    })
-
+    const error = require('./functions/error.js');
+    error.handle(e, Discord, client, msg, config, avatar)
   };
 
 })
