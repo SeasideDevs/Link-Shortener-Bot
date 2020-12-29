@@ -1,5 +1,5 @@
 module.exports = {
-  handle(error, Discord, client, msg, config, avatar) {
+  handle(error, Discord, client, msg, guild, config, avatar) {
     const chalk = require('chalk')
     const random = require('./random.js')
     const id = random.generateString(5)
@@ -36,11 +36,11 @@ module.exports = {
         "name": msg.author.tag
       },
       "channelID": msg.channel.id,
-      "error": e.name + ' ' + e.message
+      "error": error.name + ' ' + error.message
     })
 
 
-    console.log(e)
+    console.log(error)
     fs.writeFile(`errors/${id}.txt`, file, function(err) {
       return
     })

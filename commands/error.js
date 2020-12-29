@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 3,
     usage: '',
     category: "utility",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
+    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         const fs = require('fs')
         fs.readFile(`/home/runner/Link-Shortener-Bot-Canary/errors/${args[0]}.txt`, function(err, data) {
             if (!data) {

@@ -7,7 +7,7 @@ module.exports = {
     usage: '<user>',
     cooldown: 3,
     category: "utility",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
+    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         const chalk = require('chalk');
         const id = args[0]
 

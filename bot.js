@@ -1,12 +1,12 @@
 const Sentry = require('@sentry/node')
 const Tracing = require('@sentry/tracing')
 Sentry.init({
-    dsn: process.env.SENTRY_TOKEN,
-    tracesSampleRate: 1.0,
+  dsn: process.env.SENTRY_TOKEN,
+  tracesSampleRate: 1.0,
 });
 const fs = require('fs');
 const { MongoClient } = require('mongodb');
-const db = new MongoClient(process.env.DB_URL, {useUnifiedTopology: true});
+const db = new MongoClient(process.env.DB_URL, { useUnifiedTopology: true });
 let collection;
 let database;
 const Discord = require('discord.js');
@@ -14,7 +14,7 @@ const Statcord = require("statcord.js");
 const client = new Discord.Client();
 const config = require('./config.json');
 const prefix = config.prefix;
-const status = { activity: { name: prefix + 'help', type: 'LISTENING' }, status: 'online' };
+const status = { activity: { name: 'me ignore your shit opinion', type: 'WATCHING' }, status: 'online' };
 const axios = require('axios');
 const chalk = require('chalk')
 const blapi = require('blapi')
@@ -40,8 +40,8 @@ async function dbConnect() {
     database = await db.db('databases');
     chalk.yellow(`INFO`), `Connected to database`
   } catch (e) {
-      console.log(e)
-      chalk.red('ERROR'), `Logged in as ${client.user.tag}!`
+    console.log(e)
+    chalk.red('ERROR'), `Logged in as ${client.user.tag}!`
   } finally {
     //console.log(`done`)
     // Ensures that the client will close when you finish/error
@@ -77,7 +77,8 @@ client.on('guildCreate', guild => {
 
     client.channels.cache.get(config.guildLoggingChannel).send(embed)
 
-    guild.owner.send(`Thanks for adding me to ${guild.name}! To get started run \`${prefix}help\` `)
+    console.log(guild.channels.cache.filter(channel => channel.type === 'text' && channel.permissionsFor(guild.me)).forEach(c => console.log(c.name)).first())
+
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e)
   }
@@ -111,7 +112,7 @@ client.on('message', async msg => {
   if (!msg.guild) {
     guildPrefix = prefix
   } else {
-    const query = {guildID: msg.guild.id}
+    const query = { guildID: msg.guild.id }
     database = db.db('database');
     const collection = database.collection('guilds');
     const data = await collection.findOne(query)
@@ -128,7 +129,7 @@ client.on('message', async msg => {
     }
   }
   // If the command doesn't start with the prefix or is sent by a bot return
-  
+
   if (!msg.content.startsWith(guildPrefix) || msg.author.bot) return;
 
   // Cuts off the prefix and .trim removes useless spaces .split seperates the string into words and puts it in a array
@@ -166,10 +167,10 @@ client.on('message', async msg => {
   }
 
   try {
-    command.execute(msg, args, client, config, guildPrefix, axios, Discord, avatar);
+    command.execute(msg, args, client, config, guildPrefix, axios, Discord, avatar, db.db('database'));
   } catch (e) {
     const error = require('./functions/error.js');
-    error.handle(e, Discord, client, msg, config, avatar)
+    error.handle(e, Discord, client, msg, msg.guild, config, avatar)
   };
 
 })

@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 3,
     usage: '',
     category: "fun",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
+    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         const limit = 100;
         const emotePattern = /<(a|):[A-z0-9]{1,32}:[0-9]{18}>/g
         const idPattern = /[0-9]{18}/g

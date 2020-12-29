@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 3,
     usage: '<command name>',
     category: "utility",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
+    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         const commandName = args[0].toLowerCase()
         const command = msg.client.commands.find(cmd => cmd.name === commandName)
 

@@ -7,10 +7,10 @@ module.exports = {
     cooldown: 3,
     usage: '',
     category: "utility",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
-        const random = require('../functions/random-letters.js')
+    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
+        const random = require('../functions/random.js')
         async function run() {
-            msg.channel.send(await random.random(args[0]))
+            msg.channel.send(await random.generateString(args[0]))
         }
 
         run()

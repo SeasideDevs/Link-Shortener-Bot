@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 3,
     usage: '<choice> | <choice>',
     category: "fun",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
+    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         const joined = args.join(' ')
         const split = joined.split('|')
         if (split.length > 10) {

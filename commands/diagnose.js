@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 3,
     usage: '',
     category: "info",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
+    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         let description = ``;
         let embed = new Discord.MessageEmbed()
             .setColor(config.mainColor)

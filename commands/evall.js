@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 3,
     usage: '<code>',
     category: "utility",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
+    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         let code = args.join(' ');
         let returned = ``;
         let success;

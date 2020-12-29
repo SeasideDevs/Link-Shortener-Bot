@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 3,
     usage: '<part after the links slash>',
     category: "utility",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
+    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         const id = args[0]
         if (id.length !== 18) {
           msg.channel.send(`you're the fucking owner you should know how ids work`)

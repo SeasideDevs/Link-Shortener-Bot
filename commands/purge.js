@@ -7,7 +7,7 @@ module.exports = {
   cooldown: 3,
   usage: '',
   category: "moderation",
-  execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
+  execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     const amount = parseInt(args[0]);
     
     msg.delete()

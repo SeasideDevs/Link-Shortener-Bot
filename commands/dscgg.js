@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 3,
     usage: '<part after the links slash>',
     category: "utility",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, blacklist) {
+    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         const errors = require(`../snippets/dscgg.json`)
         const Link = require('dsc.js')
         const dscgg = new Link.Client(process.env.DSCGG_TOKEN)
