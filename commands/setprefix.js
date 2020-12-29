@@ -3,16 +3,18 @@ module.exports = {
     description: 'Updates the prefix of the bot for the server it is used in',
     ownerOnly: true,
     guildOnly: true,
-    args: false,
+    args: true,
     cooldown: 3,
     usage: '',
     category: "utility",
     execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         const collection = database.collection('guilds');
-        const data = collection.findOne({guildID: msg.guild.id})
+        
         async function run() {
+          const data = await collection.findOne({guildID: msg.guild.id})
+          console.log(data)
           if (!data) {
-            return msg.channel.send(`No data found for guild`)
+            return msg.channel.send(`No data found for guild yet`)
           } else {
             const filter = { guildID: msg.guild.id };
               const updatedDocument = {
@@ -22,7 +24,7 @@ module.exports = {
               }
 
               const result = await collection.updateOne(filter, updatedDocument);
-              msg.channe.send(`Update prefix to ${args[0]}`)
+              msg.channel.send(`Update prefix to ${args[0]}`)
           }
 
         }
