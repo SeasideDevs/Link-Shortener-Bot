@@ -5,7 +5,7 @@ module.exports = {
     guildOnly: true,
     args: true,
     cooldown: 3,
-    usage: '',
+    usage: '<>',
     category: "utility",
     execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
         const collection = database.collection('guilds');
