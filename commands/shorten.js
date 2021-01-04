@@ -1,16 +1,19 @@
 module.exports = {
-    name: 'shorten',
-    description: 'Shorterns links using [is.gd](https://is.gd). Currently disabled',
-    ownerOnly: false,
-    guildOnly: false,
-    args: false,
-    cooldown: 3,
-    usage: '<link>',
-    category: "utility",
-    execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
-        {
-            msg.channel.send(`This command has been temporarly disabled. Try using \`${prefix}vgd [url]\` instead`)
-            /*     let link = encodeURIComponent(args[0], msg)
+  name: "shorten",
+  description:
+    "Shorterns links using [is.gd](https://is.gd). Currently disabled",
+  ownerOnly: false,
+  guildOnly: false,
+  args: false,
+  cooldown: 3,
+  usage: "<link>",
+  category: "utility",
+  execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
+    {
+      msg.channel.send(
+        `This command has been temporarly disabled. Try using \`${prefix}vgd [url]\` instead`
+      );
+      /*     let link = encodeURIComponent(args[0], msg)
                 const errors = require(`../snippets/isgd.json`)
 
                 axios.get(`https:/is.gd/create.php?format=simple&url=${link}`)
@@ -63,6 +66,6 @@ module.exports = {
                         msg.channel.send({embed : embed})
                     }
                   }) */
-        }
     }
-}
+  },
+};
