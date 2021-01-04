@@ -1,24 +1,23 @@
 module.exports = {
-  name: "stats",
+  name: "newstats",
   description: "Shows bot statistics",
-  ownerOnly: false,
+  ownerOnly: true,
   guildOnly: false,
   args: false,
   cooldown: 10,
   usage: "",
   category: "info",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
-    const dependencies = require("../package.json");
+    const file = require("../package.json");
+    const rawDependencies = Object.entries(file.dependencies);
     const sysInfo = require("systeminformation");
-    let discordjsVersionRaw = dependencies["dependencies"]["discord.js"];
-    let axiosVersionRaw = dependencies.dependencies.axios;
-    let expressVersionRaw = dependencies.dependencies.express;
-    let sysInfoVersionRaw = dependencies.dependencies.systeminformation;
+    let dependencies = [];
+    for (const dependency of rawDependencies) {
+      const version = dependency[1].replace("^", "v");
+      const combined = `${dependency[0]}: **${version}**`;
+      dependencies.push(combined);
+    }
     // Slices the previous variable to get rid of the
-    let discordjsVersion = `v` + discordjsVersionRaw.slice(1);
-    let axiosVersion = `v` + axiosVersionRaw.slice(1);
-    let expressVersion = `v` + expressVersionRaw.slice(1);
-    let sysInfoVersion = `v` + sysInfoVersionRaw.slice(1);
     let os;
     let cpuLoad;
     let totalMemory;
@@ -91,10 +90,7 @@ module.exports = {
           `Bot Stats`,
           `Servers: **${serverCount}\n**Channels: **${channelCount}**\nUsers: **${userCount}**`
         )
-        .addField(
-          `Utilities`,
-          `Nodejs: **${process.version}**\nDiscord.js: **${discordjsVersion}**\nAxios: **${axiosVersion}**\nExpress: **${expressVersion}**\nSystem Information: **${sysInfoVersion}**`
-        )
+        .addField(`Utilities`, `${dependencies.join("\n")}`)
         .addField(
           `System`,
           `OS: **${os}**\nCPU: **${cpuLoad}%**\nMemory: **${percentage}% (${usingMemory}MB/${totalMemory}MB)**`
