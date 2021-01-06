@@ -46,7 +46,10 @@ async function dbConnect() {
     console.log(chalk.yellow(`INFO`), `Connected to database`);
   } catch (e) {
     console.log(e);
-    console.log(chalk.red("ERROR"), `There was an error connecting to the database`)
+    console.log(
+      chalk.red("ERROR"),
+      `There was an error connecting to the database`
+    );
   }
 }
 
@@ -67,9 +70,11 @@ client.on("guildCreate", async (guild) => {
   const avatar = await client.user.displayAvatarURL();
 
   try {
-    const humans = await guild.members.cache.filter((member) => !member.user.bot)
+    const humans = await guild.members.cache.filter(
+      (member) => !member.user.bot
+    ).size;
+    const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
-    const bots = await guild.members.cache.filter((member) => member.user.bot).size;
 
     let embed = new Discord.MessageEmbed()
       .setColor(config.mainColor)
