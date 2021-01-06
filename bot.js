@@ -99,26 +99,31 @@ client.on("guildCreate", (guild) => {
   }
 });
 
-client.on('guildDelete',async guild => {
+client.on("guildDelete", async (guild) => {
   if (!config.guildLoggingChannel) return;
   const avatar = await client.user.displayAvatarURL();
 
   try {
-    const humans = await guild.members.cache.filter(member => !member.user.bot).size
-    const bots = await guild.members.cache.filter(member => member.user.bot).size
-    const owner = await client.users.fetch(guild.ownerID)
+    const humans = await guild.members.cache.filter(
+      (member) => !member.user.bot
+    ).size;
+    const bots = await guild.members.cache.filter((member) => member.user.bot)
+      .size;
+    const owner = await client.users.fetch(guild.ownerID);
 
     let embed = new Discord.MessageEmbed()
       .setColor(config.errorColor)
       .setAuthor(`Left ${guild.name}`)
-      .setDescription(`**Owner:** ${owner.tag}\n**Owner ID:** ${owner.id}\n**Server ID:** ${guild.id}\n**Total Members:** ${guild.memberCount}\n**Humans:** ${humans}\n**Bots:** ${bots}`)
-      .setThumbnail(guild.iconURL())
+      .setDescription(
+        `**Owner:** ${owner.tag}\n**Owner ID:** ${owner.id}\n**Server ID:** ${guild.id}\n**Total Members:** ${guild.memberCount}\n**Humans:** ${humans}\n**Bots:** ${bots}`
+      )
+      .setThumbnail(guild.iconURL());
 
-    client.channels.cache.get(config.guildLoggingChannel).send(embed)
+    client.channels.cache.get(config.guildLoggingChannel).send(embed);
   } catch (e) {
-    console.log(chalk.bgRedBright(`ERROR`), e)
+    console.log(chalk.bgRedBright(`ERROR`), e);
   }
-})
+});
 
 client.on("message", async (msg) => {
   if (!msg.guild) {
