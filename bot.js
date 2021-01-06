@@ -43,14 +43,10 @@ async function dbConnect() {
   try {
     await db.connect();
     database = await db.db("databases");
-    chalk.yellow(`INFO`), `Connected to database`;
+    console.log(chalk.yellow(`INFO`), `Connected to database`);
   } catch (e) {
     console.log(e);
-    chalk.red("ERROR"), `Logged in as ${client.user.tag}!`;
-  } finally {
-    //console.log(`done`)
-    // Ensures that the client will close when you finish/error
-    //await client.close();
+    console.log(chalk.red("ERROR"), `There was an error connecting to the database`)
   }
 }
 
@@ -66,14 +62,14 @@ client.on("ready", () => {
 });
 
 // Fires when a new message is received
-client.on("guildCreate", (guild) => {
+client.on("guildCreate", async (guild) => {
   if (!config.guildLoggingChannel) return;
-  const avatar = client.user.displayAvatarURL();
+  const avatar = await client.user.displayAvatarURL();
 
   try {
-    const humans = guild.members.cache.filter((member) => !member.user.bot)
+    const humans = await guild.members.cache.filter((member) => !member.user.bot)
       .size;
-    const bots = guild.members.cache.filter((member) => member.user.bot).size;
+    const bots = await guild.members.cache.filter((member) => member.user.bot).size;
 
     let embed = new Discord.MessageEmbed()
       .setColor(config.mainColor)
@@ -84,16 +80,6 @@ client.on("guildCreate", (guild) => {
       .setThumbnail(guild.iconURL());
 
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
-
-    console.log(
-      guild.channels.cache
-        .filter(
-          (channel) =>
-            channel.type === "text" && channel.permissionsFor(guild.me)
-        )
-        .forEach((c) => console.log(c.name))
-        .first()
-    );
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);
   }
