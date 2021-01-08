@@ -43,7 +43,7 @@ async function dbConnect() {
   try {
     await db.connect();
     database = await db.db("databases");
-    console.log(chalk.yellow(`INFO`), `Connected to database`);
+    console.log(chalk.yellow("DATABASE"), `Connected to database`);
   } catch (e) {
     console.log(e);
     console.log(

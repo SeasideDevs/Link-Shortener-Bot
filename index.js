@@ -6,6 +6,7 @@ let statcord;
 const manager = new ShardingManager("./bot.js", { token: token });
 const chalk = require("chalk");
 const config = require("./config.json");
+const logger = require("./functions/logger.json");
 
 if (config.pingRequired) {
   const express = require("express");
@@ -19,6 +20,7 @@ if (config.pingRequired) {
 
   app.listen(port, () => {
     console.log(chalk.inverse(`INFO`), `Express Server Running`);
+    logger.log(`info`, `Express Server Running`, )
   });
 }
 

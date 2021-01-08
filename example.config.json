@@ -9,5 +9,7 @@
   "errorColor": "0xff0000",
   "successEmoji": "✅",
   "errorEmoji": "❌",
-  "botVersion": "6.0"
+  "botVersion": "6.0",
+  "loggingUsername": "Seashell Nightly",
+  "loggingAvatar": "https://cdn.discordapp.com/avatars/755911044177854586/499f4627779c97d1b14349cfe9eed178.png"
 }
