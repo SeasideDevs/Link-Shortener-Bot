@@ -20,7 +20,7 @@ if (config.pingRequired) {
 
   app.listen(port, () => {
     console.log(chalk.inverse(`INFO`), `Express Server Running`);
-    logger.log(`info`, `Express Server Running`, )
+    logger.log(`info`, `Express Server Running`);
   });
 }
 
