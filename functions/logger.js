@@ -40,7 +40,7 @@ module.exports = {
         {
           author: {
             name: typeData[logType].type,
-            icon_url: config.loggingAvatar
+            icon_url: config.loggingAvatar,
           },
           description: message,
           color: typeData[logType].color,
