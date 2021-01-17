@@ -40,15 +40,15 @@ manager.on("shardCreate", (shard) => {
 
   shard.on("death", (shard) => {
     console.log(chalk.red(`SHARD`), `Shard Died`);
-    logger.log(`shard`, `Shard Died`);
+    logger.log(`error`, `Shard Died`);
   });
   shard.on("disconnect", (shard) => {
     console.log(chalk.red(`SHARD`), `Shard ${shard.id} Disconnected`);
-    logger.log(`shard`, `Shard ${shard.id} Disconnected`);
+    logger.log(`error`, `Shard ${shard.id} Disconnected`);
   });
   shard.on("reconnecting", (shard) => {
     console.log(chalk.red(`SHARD`), `Shard ${shard.id} Reconnecting`);
-    logger.log(`shard`, `Shard ${shard.id} Reconnecting`);
+    logger.log(`error`, `Shard ${shard.id} Reconnecting`);
   });
 });
 
