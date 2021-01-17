@@ -65,14 +65,11 @@ if (statcord) {
     // status = false if the post was successful
     // status = "Error message" or status = Error if there was an error
     if (!status) {
-      console.log(`Successful Post`)
+      console.log(`Successful Post`);
       logger.log(`info`, `Successful Post`);
-    }
-    else {
-      console.error(`Error`)
+    } else {
+      console.error(`Error`);
       logger.log(`error`, `An error occured while posting stats`);
     }
-
-
   });
 }

@@ -11,7 +11,7 @@ module.exports = {
     const logType = types.indexOf(rawlogType.toLowerCase());
 
     if (!message) {
-      message =  "No message specified";
+      message = "No message specified";
     }
 
     const typeData = [
