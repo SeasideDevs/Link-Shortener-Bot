@@ -38,7 +38,10 @@ module.exports = {
       content: null,
       embeds: [
         {
-          title: typeData[logType].type,
+          author: {
+            name: typeData[logType].type,
+            icon_url: config.loggingAvatar
+          },
           description: message,
           color: typeData[logType].color,
         },
