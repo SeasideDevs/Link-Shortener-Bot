@@ -17,7 +17,7 @@ const status = {
 };
 const chalk = require("chalk");
 const blapi = require("blapi");
-const logger = require("./functions/logger.js")
+const logger = require("./functions/logger.js");
 
 //blapi.handle(client, apikeys, 120)
 
@@ -40,14 +40,14 @@ async function dbConnect() {
   try {
     await db.connect();
     console.log(chalk.yellow("DATABASE"), `Connected to database`);
-    logger.log(`database`, `Connected to Database`)
+    logger.log(`database`, `Connected to Database`);
   } catch (e) {
     console.log(e);
     console.log(
       chalk.red("ERROR"),
       `There was an error connecting to the database`
     );
-    logger.log(`error`, `There was an error connection to the database`)
+    logger.log(`error`, `There was an error connection to the database`);
   }
 }
 
@@ -55,13 +55,13 @@ dbConnect();
 
 client.on("ready", () => {
   console.log(chalk.yellow(`INFO`), `Logged in as ${client.user.tag}!`);
-  logger.log(`info`, `Logged in as ${client.user.tag}!`)
+  logger.log(`info`, `Logged in as ${client.user.tag}!`);
 
   client.user
     .setPresence(status)
     .then(function (response) {
-      console.log(chalk.yellow(`INFO`), `Status Set`)
-      logger.log(`info`, `Status Set`)
+      console.log(chalk.yellow(`INFO`), `Status Set`);
+      logger.log(`info`, `Status Set`);
     })
     .catch(console.error);
 });
