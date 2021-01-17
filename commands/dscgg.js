@@ -54,7 +54,7 @@ module.exports = {
         .setTitle(`Info for Link: **${link}**`)
         .setThumbnail(data.payload.meta.image)
         .addField(`👑  Owner:`, `**Username:** ${owner.tag}`)
-        .addField(`📢  Info:`, `**Type:** ${type}\n**Redirect:** ${redirect}`)
+        .addField(`📄  Info:`, `**Type:** ${type}\n**Redirect:** ${redirect}`)
         .addField(
           `📊  Stats:`,
           `**Clicks:** ${data.payload.stats.clicks}\n**Unique Clicks:** ${data.payload.stats.unique_clicks}`

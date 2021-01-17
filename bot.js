@@ -75,14 +75,17 @@ client.on("guildCreate", async (guild) => {
     ).size;
     const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'America/Chicago' };
+    const time = new Date();
+    const date = time.toLocaleDateString(time, options);
 
-    let embed = new Discord.MessageEmbed()
+    let embed = await new Discord.MessageEmbed()
       .setColor(config.mainColor)
       .setAuthor(`Joined ${guild.name}!`)
-      .setDescription(
-        `**Owner:** ${guild.owner.user.tag}\n**Owner ID:** ${guild.ownerID}\n**Server ID:** ${guild.id}\n**Total Members:** ${guild.memberCount}\n**Humans:** ${humans}\n**Bots:** ${bots}`
-      )
-      .setThumbnail(guild.iconURL());
+      .setThumbnail(guild.iconURL())
+      .addField(`👑 Owner:`, `**Owner:** ${guild.owner.user.tag}`)
+      .addField(`📄 Info:`, `**Total Members:** ${guild.members.cache.size}\n**Humans:** ${humans}\n**Bots:** ${bots}`)
+      .setFooter(`Joined at ${date}`)
 
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
   } catch (e) {
@@ -100,15 +103,17 @@ client.on("guildDelete", async (guild) => {
     ).size;
     const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
-    const owner = await client.users.fetch(guild.ownerID);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'America/Chicago' };
+    const time = new Date();
+    const date = time.toLocaleDateString(time, options);
 
-    let embed = new Discord.MessageEmbed()
+    let embed = await new Discord.MessageEmbed()
       .setColor(config.errorColor)
       .setAuthor(`Left ${guild.name}`)
-      .setDescription(
-        `**Owner:** ${owner.tag}\n**Owner ID:** ${owner.id}\n**Server ID:** ${guild.id}\n**Total Members:** ${guild.memberCount}\n**Humans:** ${humans}\n**Bots:** ${bots}`
-      )
-      .setThumbnail(guild.iconURL());
+      .setThumbnail(guild.iconURL())
+      .addField(`👑 Owner:`, `**Owner:** ${guild.owner.user.tag}`)
+      .addField(`📄 Info:`, `**Total Members:** ${guild.members.cache.size}\n**Humans:** ${humans}\n**Bots:** ${bots}`)
+      .setFooter(`Left at ${date}`)
 
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
   } catch (e) {
@@ -125,7 +130,6 @@ client.on("message", async (msg) => {
     const collection = database.collection("guilds");
     const data = await collection.findOne(query);
     if (!data) {
-      console.log(`do data lul`);
       guildPrefix = prefix;
     } else {
       if (!data.prefix) {

@@ -6,7 +6,7 @@ let statcord;
 const manager = new ShardingManager("./bot.js", { token: token });
 const chalk = require("chalk");
 const config = require("./config.json");
-const logger = require("./functions/logger.json");
+const logger = require("./functions/logger.js");
 
 if (config.pingRequired) {
   const express = require("express");

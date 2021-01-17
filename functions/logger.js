@@ -2,7 +2,7 @@ module.exports = {
   log(logType, message, avatar, username) {
     const types = ["info", "shard", "database, error"];
     if (types.indexOf(logType.toLowerCase()) === -1) {
-      return throw "Invalid log type";
+      throw "Invalid log type";
     }
     const typeData = [
       {
@@ -24,10 +24,10 @@ module.exports = {
     ];
 
     if (!type) {
-      return throw "No type specified";
+      throw "No type specified";
     }
     if (!message) {
-      return throw "No message specified";
+      throw "No message specified";
     }
 
     const axios = require("axios");
