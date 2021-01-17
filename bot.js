@@ -15,9 +15,9 @@ const status = {
   activity: { name: "me ignore your shit opinion", type: "WATCHING" },
   status: "online",
 };
-const axios = require("axios");
 const chalk = require("chalk");
 const blapi = require("blapi");
+const logger = require("./functions/logger.js")
 
 //blapi.handle(client, apikeys, 120)
 
@@ -40,12 +40,14 @@ async function dbConnect() {
   try {
     await db.connect();
     console.log(chalk.yellow("DATABASE"), `Connected to database`);
+    logger.log(`database`, `Connected to Database`)
   } catch (e) {
     console.log(e);
     console.log(
       chalk.red("ERROR"),
       `There was an error connecting to the database`
     );
+    logger.log(`error`, `There was an error connection to the database`)
   }
 }
 
@@ -53,10 +55,14 @@ dbConnect();
 
 client.on("ready", () => {
   console.log(chalk.yellow(`INFO`), `Logged in as ${client.user.tag}!`);
+  logger.log(`info`, `Logged in as ${client.user.tag}!`)
 
   client.user
     .setPresence(status)
-    .then(console.log(chalk.yellow(`INFO`), `Status Set`))
+    .then(function (response) {
+      console.log(chalk.yellow(`INFO`), `Status Set`)
+      logger.log(`info`, `Status Set`)
+    })
     .catch(console.error);
 });
 
@@ -207,7 +213,7 @@ client.on("message", async (msg) => {
       client,
       config,
       guildPrefix,
-      axios,
+      require("axios"),
       Discord,
       avatar,
       db.db("database")

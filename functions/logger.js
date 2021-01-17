@@ -4,7 +4,7 @@ module.exports = {
     if (!config.webookLogging) {
       return;
     }
-    const types = ["info", "shard", "database, error"];
+    const types = ["info", "shard", "database", "error"];
     if (types.indexOf(rawlogType.toLowerCase()) === -1) {
       throw "Invalid log type";
     }
