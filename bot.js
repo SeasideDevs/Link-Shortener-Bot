@@ -101,7 +101,7 @@ client.on("guildCreate", async (guild) => {
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);
-    logger.log(`error`, `e`)
+    logger.log(`error`, `e`);
   }
 });
 
@@ -139,7 +139,7 @@ client.on("guildDelete", async (guild) => {
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);
-    logger.log(`error`, `e`)
+    logger.log(`error`, `e`);
   }
 });
 
