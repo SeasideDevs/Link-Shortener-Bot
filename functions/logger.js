@@ -1,9 +1,15 @@
 module.exports = {
-  log(logType, message, avatar, username) {
+  log(rawlogType, message, avatar, username) {
     const types = ["info", "shard", "database, error"];
-    if (types.indexOf(logType.toLowerCase()) === -1) {
+    if (types.indexOf(rawlogType.toLowerCase()) === -1) {
       throw "Invalid log type";
     }
+    const logType = types.indexOf(rawlogType.toLowerCase());
+
+    if (!message) {
+      throw "No message specified";
+    }
+
     const typeData = [
       {
         type: "Info",
@@ -23,14 +29,8 @@ module.exports = {
       },
     ];
 
-    if (!type) {
-      throw "No type specified";
-    }
-    if (!message) {
-      throw "No message specified";
-    }
-
     const axios = require("axios");
+    const config = require("../config.json")
     const data = {
       content: null,
       embeds: [
@@ -40,8 +40,8 @@ module.exports = {
           color: typeData[logType].color,
         },
       ],
-      username: client.user.username,
-      avatar_url: client.user.avatarURL(),
+      username: config.loggingUsername,
+      avatar_url: config.loggingAvatar,
     };
     axios.post(process.env.WEBHOOK_URL, data);
   },
