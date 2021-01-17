@@ -6,7 +6,7 @@
   "port": 3000,
   "defautCooldown": 3,
   "mainColor": "0x2ECC71",
-  "errorColor": "0xff0000",
+  "errorColor": "0xfd6868",
   "successEmoji": "✅",
   "errorEmoji": "❌",
   "botVersion": "6.0",

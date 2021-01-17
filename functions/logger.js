@@ -17,19 +17,19 @@ module.exports = {
     const typeData = [
       {
         type: "Info",
-        color: 8257405,
+        color: 3066993,
       },
       {
         type: "Shard",
-        color: 16763904,
+        color: 16770692,
       },
       {
         type: "Database",
-        color: 9371903,
+        color: 11223295,
       },
       {
         type: "Error",
-        color: 16711680,
+        color: 16607336,
       },
     ];
 
