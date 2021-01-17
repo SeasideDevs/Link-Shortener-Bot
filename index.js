@@ -10,7 +10,6 @@ const logger = require("./functions/logger.js");
 
 if (config.pingRequired) {
   const express = require("express");
-  const config = require("../config.json");
   const app = express();
   const port = config.port;
 
@@ -37,15 +36,19 @@ if (statcordToken) {
 
 manager.on("shardCreate", (shard) => {
   console.log(chalk.blue(`SHARD`), `Launched Shard ${shard.id}`);
+  logger.log(`shard`, `Launched Shard ${shard.id}`);
 
   shard.on("death", (shard) => {
     console.log(chalk.red(`SHARD`), `Shard Died`);
+    logger.log(`shard`, `Shard Died`);
   });
   shard.on("disconnect", (shard) => {
     console.log(chalk.red(`SHARD`), `Shard ${shard.id} Disconnected`);
+    logger.log(`shard`, `Shard ${shard.id} Disconnected`);
   });
   shard.on("reconnecting", (shard) => {
     console.log(chalk.red(`SHARD`), `Shard ${shard.id} Reconnecting`);
+    logger.log(`shard`, `Shard ${shard.id} Reconnecting`);
   });
 });
 
@@ -54,13 +57,22 @@ manager.spawn();
 if (statcord) {
   statcord.on("autopost-start", () => {
     // Emitted when statcord autopost starts
-    console.log("Started autopost");
+    console.log("Started Autopost");
+    logger.log(`info`, `Started Autopost`);
   });
 
   statcord.on("post", (status) => {
     // status = false if the post was successful
     // status = "Error message" or status = Error if there was an error
-    if (!status) console.log("Successful post");
-    else console.error(`Error`);
+    if (!status) {
+      console.log(`Successful Post`)
+      logger.log(`info`, `Successful Post`);
+    }
+    else {
+      console.error(`Error`)
+      logger.log(`error`, `An error occured while posting stats`);
+    }
+
+
   });
 }

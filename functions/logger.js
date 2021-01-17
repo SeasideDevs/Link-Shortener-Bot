@@ -1,5 +1,9 @@
 module.exports = {
   log(rawlogType, message, avatar, username) {
+    const config = require("../config.json");
+    if (!config.webookLogging) {
+      return;
+    }
     const types = ["info", "shard", "database, error"];
     if (types.indexOf(rawlogType.toLowerCase()) === -1) {
       throw "Invalid log type";
@@ -7,7 +11,7 @@ module.exports = {
     const logType = types.indexOf(rawlogType.toLowerCase());
 
     if (!message) {
-      throw "No message specified";
+      message =  "No message specified";
     }
 
     const typeData = [
@@ -30,7 +34,6 @@ module.exports = {
     ];
 
     const axios = require("axios");
-    const config = require("../config.json");
     const data = {
       content: null,
       embeds: [
