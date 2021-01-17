@@ -8,7 +8,8 @@ module.exports = {
   usage: "",
   category: "fun",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
-    msg.channel.send(args.join(" "));
+    const message = msg.content.replace(`${prefix}say `, ``)
+    msg.channel.send(message);
     try {
       msg.delete();
     } catch (e) {
