@@ -75,7 +75,13 @@ client.on("guildCreate", async (guild) => {
     ).size;
     const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'America/Chicago' };
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "America/Chicago",
+    };
     const time = new Date();
     const date = time.toLocaleDateString(time, options);
 
@@ -84,8 +90,11 @@ client.on("guildCreate", async (guild) => {
       .setAuthor(`Joined ${guild.name}!`)
       .setThumbnail(guild.iconURL())
       .addField(`👑 Owner:`, `**Owner:** ${guild.owner.user.tag}`)
-      .addField(`📄 Info:`, `**Total Members:** ${guild.members.cache.size}\n**Humans:** ${humans}\n**Bots:** ${bots}`)
-      .setFooter(`Joined at ${date}`)
+      .addField(
+        `📄 Info:`,
+        `**Total Members:** ${guild.members.cache.size}\n**Humans:** ${humans}\n**Bots:** ${bots}`
+      )
+      .setFooter(`Joined at ${date}`);
 
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
   } catch (e) {
@@ -103,7 +112,13 @@ client.on("guildDelete", async (guild) => {
     ).size;
     const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'America/Chicago' };
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "America/Chicago",
+    };
     const time = new Date();
     const date = time.toLocaleDateString(time, options);
 
@@ -112,8 +127,11 @@ client.on("guildDelete", async (guild) => {
       .setAuthor(`Left ${guild.name}`)
       .setThumbnail(guild.iconURL())
       .addField(`👑 Owner:`, `**Owner:** ${guild.owner.user.tag}`)
-      .addField(`📄 Info:`, `**Total Members:** ${guild.members.cache.size}\n**Humans:** ${humans}\n**Bots:** ${bots}`)
-      .setFooter(`Left at ${date}`)
+      .addField(
+        `📄 Info:`,
+        `**Total Members:** ${guild.members.cache.size}\n**Humans:** ${humans}\n**Bots:** ${bots}`
+      )
+      .setFooter(`Left at ${date}`);
 
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
   } catch (e) {
