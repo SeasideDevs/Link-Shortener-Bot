@@ -1,7 +1,7 @@
 module.exports = {
   log(rawlogType, message, avatar, username) {
     const config = require("../config.json");
-    if (!config.webookLogging) {
+    if (!config.webhookLogging) {
       return;
     }
     const types = ["info", "shard", "database", "error"];
