@@ -223,6 +223,7 @@ client.on("message", async (msg) => {
   } catch (e) {
     const error = require("./functions/error.js");
     error.handle(e, Discord, client, msg, msg.guild, config, avatar);
+    logger.log(`error`, `e`)
   }
 });
 
