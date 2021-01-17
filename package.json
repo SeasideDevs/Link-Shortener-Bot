@@ -1,6 +1,6 @@
 {
   "name": "Link-Shortner-Bot",
-  "version": "1.0.0",
+  "version": "6.0.0",
   "description": "Link Shortener is a bot meant to help with shortening links on Discord. Soon to be a multipurpose bot",
   "main": "index.js",
   "dependencies": {

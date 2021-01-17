@@ -7,10 +7,7 @@ Sentry.init({
 const fs = require("fs");
 const { MongoClient } = require("mongodb");
 const db = new MongoClient(process.env.DB_URL, { useUnifiedTopology: true });
-let collection;
-let database;
 const Discord = require("discord.js");
-const Statcord = require("statcord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 const prefix = config.prefix;
@@ -42,7 +39,6 @@ for (const file of commandFiles) {
 async function dbConnect() {
   try {
     await db.connect();
-    database = await db.db("databases");
     console.log(chalk.yellow("DATABASE"), `Connected to database`);
   } catch (e) {
     console.log(e);
@@ -144,7 +140,7 @@ client.on("message", async (msg) => {
     guildPrefix = prefix;
   } else {
     const query = { guildID: msg.guild.id };
-    database = db.db("database");
+    const database = db.db("database");
     const collection = database.collection("guilds");
     const data = await collection.findOne(query);
     if (!data) {
@@ -177,7 +173,10 @@ client.on("message", async (msg) => {
   const avatar = client.user.displayAvatarURL();
   const command = client.commands.get(commandName);
 
-  Statcord.ShardingClient.postCommand(commandName, msg.author.id, client);
+  if (process.env.STATCORD_TOKEN) {
+    const Statcord = require("statcord.js");
+    Statcord.ShardingClient.postCommand(commandName, msg.author.id, client);
+  }
 
   if (command.ownerOnly && msg.author.id !== config.ownerID) return;
 
