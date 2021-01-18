@@ -7,17 +7,16 @@ Sentry.init({
 const fs = require("fs");
 const { MongoClient } = require("mongodb");
 const db = new MongoClient(process.env.DB_URL, { useUnifiedTopology: true });
+const Discord = require("discord.js");
+const client = new Discord.Client({
+  disableMentions: "everyone",
+});
+const config = require("./config.json");
+const prefix = config.prefix;
 const status = {
   activity: { name: "me ignore your opinion", type: "WATCHING" },
   status: "online",
 };
-const Discord = require("discord.js");
-const client = new Discord.Client({
-  disableMentions: "everyone",
-  presense: status,
-});
-const config = require("./config.json");
-const prefix = config.prefix;
 const chalk = require("chalk");
 const blapi = require("blapi");
 const logger = require("./functions/logger.js");
@@ -59,6 +58,14 @@ dbConnect();
 client.on("ready", () => {
   console.log(chalk.yellow(`INFO`), `Logged in as ${client.user.tag}!`);
   logger.log(`info`, `Logged in as ${client.user.tag}!`);
+
+  client.user
+    .setPresence(status)
+    .then(function (response) {
+      console.log(chalk.yellow(`INFO`), `Status Set`);
+      logger.log(`info`, `Status Set`);
+    })
+    .catch(console.error);
 });
 
 // Fires when a new message is received
