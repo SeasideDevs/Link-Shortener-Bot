@@ -9,7 +9,7 @@ const { MongoClient } = require("mongodb");
 const db = new MongoClient(process.env.DB_URL, { useUnifiedTopology: true });
 const Discord = require("discord.js");
 const client = new Discord.Client({
-  disableMentions: "everyone"
+  disableMentions: "everyone",
 });
 const config = require("./config.json");
 const prefix = config.prefix;
