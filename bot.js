@@ -8,7 +8,7 @@ const fs = require("fs");
 const { MongoClient } = require("mongodb");
 const db = new MongoClient(process.env.DB_URL, { useUnifiedTopology: true });
 const status = {
-  activity: { name: "me ignore your shit opinion", type: "WATCHING" },
+  activity: { name: "me ignore your opinion", type: "WATCHING" },
   status: "online",
 };
 const Discord = require("discord.js");
