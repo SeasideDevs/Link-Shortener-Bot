@@ -77,6 +77,7 @@ client.on("guildCreate", async (guild) => {
     ).size;
     const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
+    const owner = await client.users.fetch(guild.ownerID)
     const options = {
       weekday: "long",
       year: "numeric",
@@ -91,7 +92,7 @@ client.on("guildCreate", async (guild) => {
       .setColor(config.mainColor)
       .setAuthor(`Joined ${guild.name}!`)
       .setThumbnail(guild.iconURL())
-      .addField(`👑 Owner:`, `**Owner:** ${guild.owner.user.tag}`)
+      .addField(`👑 Owner:`, `**Owner:** ${owner.tag}`)
       .addField(
         `📄 Info:`,
         `**Total Members:** ${guild.members.cache.size}\n**Humans:** ${humans}\n**Bots:** ${bots}`
@@ -115,6 +116,7 @@ client.on("guildDelete", async (guild) => {
     ).size;
     const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
+    const owner = await client.users.fetch(guild.ownerID)
     const options = {
       weekday: "long",
       year: "numeric",
@@ -129,7 +131,7 @@ client.on("guildDelete", async (guild) => {
       .setColor(config.errorColor)
       .setAuthor(`Left ${guild.name}`)
       .setThumbnail(guild.iconURL())
-      .addField(`👑 Owner:`, `**Owner:** ${guild.owner.user.tag}`)
+      .addField(`👑 Owner:`, `**Owner:** ${owner.tag}`)
       .addField(
         `📄 Info:`,
         `**Total Members:** ${guild.members.cache.size}\n**Humans:** ${humans}\n**Bots:** ${bots}`
