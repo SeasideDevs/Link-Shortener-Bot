@@ -77,7 +77,7 @@ client.on("guildCreate", async (guild) => {
     ).size;
     const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
-    const owner = await client.users.fetch(guild.ownerID)
+    const owner = await client.users.fetch(guild.ownerID);
     const options = {
       weekday: "long",
       year: "numeric",
@@ -116,7 +116,7 @@ client.on("guildDelete", async (guild) => {
     ).size;
     const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
-    const owner = await client.users.fetch(guild.ownerID)
+    const owner = await client.users.fetch(guild.ownerID);
     const options = {
       weekday: "long",
       year: "numeric",
