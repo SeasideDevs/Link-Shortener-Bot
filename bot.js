@@ -14,7 +14,7 @@ const client = new Discord.Client({
 const config = require("./config.json");
 const prefix = config.prefix;
 const status = {
-  activity: { name: "me ignore your opinion", type: "WATCHING" },
+  activity: { name: "you", type: "WATCHING" },
   status: "online",
 };
 const chalk = require("chalk");
