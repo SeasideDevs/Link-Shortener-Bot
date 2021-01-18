@@ -14,7 +14,7 @@ const status = {
 const Discord = require("discord.js");
 const client = new Discord.Client({
   disableMentions: "everyone",
-  presense: status
+  presense: status,
 });
 const config = require("./config.json");
 const prefix = config.prefix;
