@@ -20,7 +20,7 @@ module.exports = {
       try {
         let token = code.search("client.token");
         if (token !== -1) {
-          returned += `Nice Try`;
+          returned = `Nice Try`;
         } else {
           let rawReturned = await eval(code);
           returned += rawReturned;

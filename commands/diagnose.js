@@ -1,8 +1,8 @@
 module.exports = {
   name: "diagnose",
-  description: "Shows the bots latency",
+  description: "Diagnoses the bots current permissions",
   ownerOnly: false,
-  guildOnly: false,
+  guildOnly: true,
   args: false,
   cooldown: 3,
   usage: "",
