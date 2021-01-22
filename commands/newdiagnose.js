@@ -9,6 +9,12 @@ module.exports = {
   category: "info",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     // Checks for Administrator permission and returns if it has it
+    let description = ``;
+    let color;
+    let embed = new Discord.MessageEmbed()
+      .setColor(config.mainColor)
+      .setTitle(`Permissions`)
+
 
     if (msg.guild.me.hasPermission("ADMINISTRATOR")) {
       embed.setColor(config.mainColor);
@@ -16,7 +22,7 @@ module.exports = {
       return msg.channel.send(embed);
     }
 
-    const requiredPermission = [{
+    const requiredPermissions = [{
       name: "ADD_REACTIONS",
       friendlyName: "Add Reactions"
     },
@@ -37,23 +43,22 @@ module.exports = {
       friendlyName: "Read Message History"
     },
     {
-      name: "USE_EXTERNAL_EMOJIS"
+      name: "USE_EXTERNAL_EMOJIS",
       friendlyName: "Use External Emotes"
     }]
-    
-    let description = ``;
-    let embed = new Discord.MessageEmbed()
-      .setColor(config.mainColor)
-      .setAuthor(`Permissions`, avatar)
 
     for (const permission of requiredPermissions) {
-      if (msg.guild.me.hasPermissions(permission.name)) {
-        description += `✅  ${permission}`
+      if (msg.guild.me.hasPermission(permission.name)) {
+        description += `\n✅  ${permission.friendlyName}`
+      } else {
+        description += `\n<:denied:801937835686756402>  ${permission.friendlyName}`
+        color = config.errorColor
       }
     }
 
     msg.react('✅')
     embed.setDescription(description);
-    //msg.channel.send(embed);
+    embed.setColor(color)
+    msg.channel.send(embed);
   },
 };
