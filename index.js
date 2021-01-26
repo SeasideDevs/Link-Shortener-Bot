@@ -5,7 +5,7 @@ const statcordToken = process.env.STATCORD_TOKEN;
 let statcord;
 const manager = new ShardingManager("./bot.js", { token: token });
 const chalk = require("chalk");
-const toml = require('toml');
+const toml = require("toml");
 const config = require("./config.json");
 const logger = require("./functions/logger.js");
 
