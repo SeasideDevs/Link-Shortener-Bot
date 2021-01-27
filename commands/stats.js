@@ -84,7 +84,7 @@ module.exports = {
           channelCount = reduced;
         });
 
-        await client.shard
+      await client.shard
         .fetchClientValues("emojis.cache.size")
         .then((results) => {
           const reducer = (accumulator, shardGuilds) =>
