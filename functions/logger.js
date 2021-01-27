@@ -1,7 +1,7 @@
 module.exports = {
   log(rawlogType, message, avatar, username) {
     require("toml-require").install({ toml: require("toml") });
-const config = require("../config.toml");
+    const config = require("../config.toml");
     if (!config.logging.system) {
       return;
     }
