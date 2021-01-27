@@ -11,7 +11,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client({
   disableMentions: "everyone",
 });
-require('toml-require').install({toml: require('toml')})
+require("toml-require").install({ toml: require("toml") });
 const config = require("./config.json");
 const prefix = config.prefix;
 const status = {
