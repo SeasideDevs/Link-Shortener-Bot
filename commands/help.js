@@ -55,7 +55,7 @@ module.exports = {
       const list = commands.map(filter);
 
       // Checks if they user if the owner and if so it adds a owner command field
-      if (msg.author.id === config.ownerID) {
+      if (msg.author.id === config.ownerid) {
         let ownerJoined = `\`${owner.join(" ")}\``;
         if (owner.length === 0) {
           ownerJoined = `No Commands In This Category`;

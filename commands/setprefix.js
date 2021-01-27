@@ -1,7 +1,7 @@
 module.exports = {
   name: "setprefix",
   description: "Updates the prefix of the bot for the server it is used in",
-  ownerOnly: true,
+  ownerOnly: false,
   guildOnly: true,
   args: true,
   cooldown: 3,

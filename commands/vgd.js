@@ -16,7 +16,7 @@ module.exports = {
       .get(`https://v.gd/create.php?format=simple&url=${link}`)
       .then(function (response) {
         // handle success
-        embed.setColor(config.mainColor);
+        embed.setColor(config.colors.main);
         embed.setAuthor(`Success`, avatar);
         embed.setTitle(`Link`);
         embed.setDescription(`${response.data}`);
@@ -24,7 +24,7 @@ module.exports = {
         msg.channel.send({
           embed,
         });
-        msg.react(config.successEmoji);
+        msg.react(config.emojis.success);
       })
       .catch(function (error) {
         // handle error
@@ -34,7 +34,7 @@ module.exports = {
 
         if (error.response.data === errors.vgdInvalid) {
           const embed = new Discord.MessageEmbed()
-            .setColor(config.errorColor)
+            .setColor(config.colors.error)
             .setAuthor(`Invalid URL`, avatar)
             .setDescription(`Please try again with a valid URL`);
 
@@ -43,13 +43,13 @@ module.exports = {
           });
         } else if (error.response.data === errors.vgdBlacklisted) {
           const embed = new Discord.MessageEmbed()
-            .setColor(config.errorColor)
+            .setColor(config.colors.error)
             .setAuthor(`Blacklisted URL`, avatar)
             .setDescription(
               `This URL has been blacklisted. This can happen when it has been abused in the past or leads to another URL shortner`
             );
 
-          msg.react(config.errorEmoji);
+          msg.react(config.emojis.error);
           msg.channel.send({
             embed,
           });

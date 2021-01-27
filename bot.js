@@ -191,7 +191,7 @@ client.on("message", async (msg) => {
     Statcord.ShardingClient.postCommand(commandName, msg.author.id, client);
   }
 
-  if (command.ownerOnly && msg.author.id !== config.ownerID) return;
+  if (command.ownerOnly && msg.author.id !== config.ownerid) return;
 
   if (command.args && !args.length) {
     let message = `You are missing some required arguments`;

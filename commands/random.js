@@ -2,7 +2,7 @@ module.exports = {
   name: "random",
   description:
     "Generates a random set of characters. Not polished enough for the pubic",
-  ownerOnly: true,
+  ownerOnly: false,
   guildOnly: false,
   args: true,
   cooldown: 3,
