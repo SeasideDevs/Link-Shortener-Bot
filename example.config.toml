@@ -1,0 +1,20 @@
+ownerid = "enter the owner id here"
+prefix = "s!"
+version = "1.0"
+[colors]
+main = "2ECC71"
+error = "fd6868"
+[emojis]
+success = "✅"
+error = "❌"
+[logging]
+guild-join-leave = true
+system = true
+username = "Seashell Nightly"
+avatar = "https://cdn.discordapp.com/avatars/755911044177854586/499f4627779c97d1b14349cfe9eed178.png"
+[httpserver]
+enabled = true
+port = 3000
+[cooldowns]
+owner = 0
+default = 3

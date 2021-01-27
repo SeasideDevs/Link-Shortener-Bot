@@ -1,7 +1,8 @@
 module.exports = {
   log(rawlogType, message, avatar, username) {
-    const config = require("../config.json");
-    if (!config.webhookLogging) {
+    require("toml-require").install({ toml: require("toml") });
+const config = require("../config.toml");
+    if (!config.logging.system) {
       return;
     }
     const types = ["info", "shard", "database", "error"];
@@ -40,14 +41,14 @@ module.exports = {
         {
           author: {
             name: typeData[logType].type,
-            icon_url: config.loggingAvatar,
+            icon_url: config.logging.avatar,
           },
           description: message,
           color: typeData[logType].color,
         },
       ],
-      username: config.loggingUsername,
-      avatar_url: config.loggingAvatar,
+      username: config.logging.username,
+      avatar_url: config.logging.avatar,
     };
     axios.post(process.env.WEBHOOK_URL, data);
   },
