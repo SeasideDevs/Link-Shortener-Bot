@@ -5,7 +5,7 @@ module.exports = {
   guildOnly: true,
   args: true,
   cooldown: 3,
-  usage: "<part after the links slash>",
+  usage: "<id> <message>",
   category: "utility",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     msg.delete();
