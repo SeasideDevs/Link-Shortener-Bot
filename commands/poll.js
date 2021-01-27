@@ -11,7 +11,7 @@ module.exports = {
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     async function run() {
       let embed = new Discord.MessageEmbed()
-        .setColor(config.mainColor)
+        .setColor(config.colors.main)
         .setAuthor(`New Poll by ${msg.author.tag}!`, avatar)
         .setFooter(`Vote by clicking one of the reactions below!`);
       const subcommands = [

@@ -12,7 +12,7 @@ const client = new Discord.Client({
   disableMentions: "everyone",
 });
 require("toml-require").install({ toml: require("toml") });
-const config = require("./config.json");
+const config = require("./config.toml");
 const prefix = config.prefix;
 const status = {
   activity: { name: "you", type: "WATCHING" },

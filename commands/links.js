@@ -9,7 +9,7 @@ module.exports = {
   category: "info",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     const embed = new Discord.MessageEmbed()
-      .setColor(config.mainColor)
+      .setColor(config.colors.main)
       .setAuthor(`Links`, avatar)
       .addField(`Invite`, `[Click Here](https://dsc.gg/seashell)`)
       .addField(`Support Server`, `[Click Here](https://dsc.gg/sea)`)

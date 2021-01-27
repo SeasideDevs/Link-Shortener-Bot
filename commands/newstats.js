@@ -84,7 +84,7 @@ module.exports = {
         });
 
       let embed = new Discord.MessageEmbed()
-        .setColor(config.mainColor)
+        .setColor(config.colors.main)
         .setAuthor(`Stats`, avatar)
         .addField(
           `Bot Stats`,
