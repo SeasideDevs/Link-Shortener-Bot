@@ -21,16 +21,17 @@ module.exports = {
     const user = client.users.fetch(id).then(function (user) {
       msg.channel.fetchWebhooks().then(function (webhooks) {
         if (!webhooks.size) {
-          msg.channel.createWebhook(client.user.username, {
-            avatar: avatar,
-            reason: "Needed a cool new Webhook",
-          })
-          .then(function (webhook) {
-            webhook.send(message, {
-            username: user.username,
-            avatarURL: user.avatarURL(),
-          });
-          })
+          msg.channel
+            .createWebhook(client.user.username, {
+              avatar: avatar,
+              reason: "Needed a cool new Webhook",
+            })
+            .then(function (webhook) {
+              webhook.send(message, {
+                username: user.username,
+                avatarURL: user.avatarURL(),
+              });
+            });
         } else {
           webhooks.first().send(message, {
             username: user.username,
