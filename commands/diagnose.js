@@ -16,7 +16,7 @@ module.exports = {
     // Checks for Administrator permission
 
     if (msg.guild.me.hasPermission("ADMINISTRATOR")) {
-      embed.setColor(config.mainColor);
+      embed.setColor(config.colors.main);
       embed.setDescription(`✅  I have all permissions required!`);
       return msg.channel.send(embed);
     }

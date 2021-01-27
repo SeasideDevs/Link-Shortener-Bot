@@ -27,15 +27,15 @@ module.exports = {
         }
         embed.addField(`📥 Result`, returned);
         embed.setAuthor(`Success!`, avatar);
-        embed.setColor(config.mainColor);
-        msg.react(config.successEmoji);
+        embed.setColor(config.colors.main);
+        msg.react(config.emojis.success);
       } catch (e) {
         returned += e;
 
         embed.addField(`📥 Result`, returned);
         embed.setAuthor(`Error`, avatar);
-        embed.setColor(config.errorColor);
-        msg.react(config.errorEmoji);
+        embed.setColor(config.colors.error);
+        msg.react(config.emojis.error);
       }
       msg.channel.send(embed);
     }

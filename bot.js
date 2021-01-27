@@ -11,6 +11,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client({
   disableMentions: "everyone",
 });
+require('toml-require').install({toml: require('toml')})
 const config = require("./config.json");
 const prefix = config.prefix;
 const status = {
@@ -200,7 +201,7 @@ client.on("message", async (msg) => {
     }
 
     let embed = new Discord.MessageEmbed()
-      .setColor(config.errorColor)
+      .setColor(config.colors.error)
       .setAuthor(`Error`, avatar)
       .setTitle(`Missing Arguments`)
       .setDescription(message);

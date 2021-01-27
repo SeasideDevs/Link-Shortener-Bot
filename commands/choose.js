@@ -21,7 +21,7 @@ module.exports = {
     let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
     const embed = new Discord.MessageEmbed()
-      .setColor(config.mainColor)
+      .setColor(config.colors.main)
       .setAuthor(`I choose...`, avatar)
       .setDescription(`${split[randomNum]}`);
 

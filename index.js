@@ -5,14 +5,14 @@ const statcordToken = process.env.STATCORD_TOKEN;
 let statcord;
 const manager = new ShardingManager("./bot.js", { token: token });
 const chalk = require("chalk");
-require('toml-require').install({toml: require('toml')}))
-const config = require("./config.json");
+require('toml-require').install({toml: require('toml')})
+const config = require("./config.toml");
 const logger = require("./functions/logger.js");
 
-if (config.pingRequired) {
+if (config.httpserver.enabled) {
   const express = require("express");
   const app = express();
-  const port = config.port;
+  const port = config.httpserver.port;
 
   app.get("/", (req, res) => {
     res.send(`Hello`);

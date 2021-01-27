@@ -9,7 +9,7 @@ module.exports = {
   category: "info",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     const embed = new Discord.MessageEmbed()
-      .setColor(config.mainColor)
+      .setColor(config.colors.main)
       .setAuthor(`Changelog`, avatar)
       .setTitle(`Version ${config.botVersion}`)
       .setDescription(`STOP COMPLAINING ABOUT MY UPDATES`);

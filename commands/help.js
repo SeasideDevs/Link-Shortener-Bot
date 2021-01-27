@@ -11,7 +11,7 @@ module.exports = {
     const { commands } = msg.client;
 
     if (!args.length) {
-      const embed = new Discord.MessageEmbed().setColor(config.mainColor);
+      const embed = new Discord.MessageEmbed().setColor(config.colors.main);
       // Here we declare the arrays were the commands will be sorted into
       let owner = [];
       let admin = [];
@@ -102,7 +102,7 @@ module.exports = {
       msg.channel.send(embed);
     } else {
       // This code is if they do provide an argument
-      const embed = new Discord.MessageEmbed().setColor(config.mainColor);
+      const embed = new Discord.MessageEmbed().setColor(config.colors.main);
       // This comment is to make sure you know this is a embeded if statement
       const command = commands.get(args[0]);
       if (!command || (command.ownerOnly && msg.author.id !== config.ownerID)) {
