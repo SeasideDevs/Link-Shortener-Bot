@@ -55,6 +55,7 @@ module.exports = {
       let serverCount;
       let userCount;
       let channelCount;
+      let emojiCount;
 
       await client.shard
         .fetchClientValues("guilds.cache.size")
@@ -83,12 +84,21 @@ module.exports = {
           channelCount = reduced;
         });
 
+        await client.shard
+        .fetchClientValues("emojis.cache.size")
+        .then((results) => {
+          const reducer = (accumulator, shardGuilds) =>
+            accumulator + shardGuilds;
+          const reduced = results.reduce(reducer);
+          emojiCount = reduced;
+        });
+
       let embed = new Discord.MessageEmbed()
         .setColor(config.colors.main)
         .setAuthor(`Stats`, avatar)
         .addField(
           `Bot Stats`,
-          `Servers: **${serverCount}\n**Channels: **${channelCount}**\nUsers: **${userCount}**`
+          `Servers: **${serverCount}\n**Channels: **${channelCount}**\nUsers: **${userCount}**\nEmotes: **${emojiCount}**`
         )
         .addField(`Utilities`, `${dependencies.join("\n")}`)
         .addField(
