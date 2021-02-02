@@ -105,7 +105,7 @@ module.exports = {
       const embed = new Discord.MessageEmbed().setColor(config.colors.main);
       // This comment is to make sure you know this is a embeded if statement
       const command = commands.get(args[0]);
-      if (!command || (command.ownerOnly && msg.author.id !== config.ownerID)) {
+      if (!command || (command.ownerOnly && msg.author.id !== config.ownerid)) {
         msg.channel.send(`${args[0]} is a not a valid command`);
       } else {
         let description = command.description;
