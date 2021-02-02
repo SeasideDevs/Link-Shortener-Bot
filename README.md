@@ -22,4 +22,5 @@ If you find these instructions too complicated you can also run this on [repl.it
 Dependencies are automatically installed and you start the bot by using the run button at the top of the UI. This method will need the project to be pinged every so often (5 minutes works great in my testing). You can use a site like [Uptime Robot](https://uptimerobot.com) and their free plan to set up a http monitor to ping your project. If you cannot get the bot working there will be no support provided.
 
 ## License
+
 View the License [here](https://github.com/SeasideDevs/Link-Shortener-Bot/blob/master/LICENSE)
