@@ -1,7 +1,7 @@
 {
-  "name": "Link-Shortner-Bot",
+  "name": "Seashel",
   "version": "6.0.0",
-  "description": "Link Shortener is a bot meant to help with shortening links on Discord. Soon to be a multipurpose bot",
+  "description": "Seashell is a small bot multipurpose Discord bot",
   "main": "index.js",
   "dependencies": {
     "@sentry/node": "^5.29.2",
@@ -22,7 +22,7 @@
   "scripts": {
     "test": "node ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": ["discord", "bot", "discord-bot", "discord-api"],
+  "author": "Issai H",
+  "license": "MIT"
 }
