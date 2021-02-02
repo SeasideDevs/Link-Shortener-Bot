@@ -22,7 +22,12 @@
   "scripts": {
     "test": "node ."
   },
-  "keywords": ["discord", "bot", "discord-bot", "discord-api"],
+  "keywords": [
+    "discord",
+    "bot",
+    "discord-bot",
+    "discord-api"
+  ],
   "author": "Issai H",
   "license": "MIT"
 }
