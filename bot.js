@@ -7,20 +7,20 @@ Sentry.init({
 const fs = require("fs");
 const { MongoClient } = require("mongodb");
 const db = new MongoClient(process.env.DB_URL, { useUnifiedTopology: true });
-let collection;
-let database;
 const Discord = require("discord.js");
-const Statcord = require("statcord.js");
-const client = new Discord.Client();
-const config = require("./config.json");
+const client = new Discord.Client({
+  disableMentions: "everyone",
+});
+require("toml-require").install({ toml: require("toml") });
+const config = require("./config.toml");
 const prefix = config.prefix;
 const status = {
-  activity: { name: "me ignore your shit opinion", type: "WATCHING" },
+  activity: { name: "you", type: "WATCHING" },
   status: "online",
 };
-const axios = require("axios");
 const chalk = require("chalk");
 const blapi = require("blapi");
+const logger = require("./functions/logger.js");
 
 //blapi.handle(client, apikeys, 120)
 
@@ -42,15 +42,15 @@ for (const file of commandFiles) {
 async function dbConnect() {
   try {
     await db.connect();
-    database = await db.db("databases");
-    chalk.yellow(`INFO`), `Connected to database`;
+    console.log(chalk.yellow("DATABASE"), `Connected to database`);
+    logger.log(`database`, `Connected to Database`);
   } catch (e) {
     console.log(e);
-    chalk.red("ERROR"), `Logged in as ${client.user.tag}!`;
-  } finally {
-    //console.log(`done`)
-    // Ensures that the client will close when you finish/error
-    //await client.close();
+    console.log(
+      chalk.red("ERROR"),
+      `There was an error connecting to the database`
+    );
+    logger.log(`error`, `There was an error connection to the database`);
   }
 }
 
@@ -58,67 +58,93 @@ dbConnect();
 
 client.on("ready", () => {
   console.log(chalk.yellow(`INFO`), `Logged in as ${client.user.tag}!`);
+  logger.log(`info`, `Logged in as ${client.user.tag}!`);
 
   client.user
     .setPresence(status)
-    .then(console.log(chalk.yellow(`INFO`), `Status Set`))
+    .then(function (response) {
+      console.log(chalk.yellow(`INFO`), `Status Set`);
+      logger.log(`info`, `Status Set`);
+    })
     .catch(console.error);
 });
 
 // Fires when a new message is received
-client.on("guildCreate", (guild) => {
+client.on("guildCreate", async (guild) => {
   if (!config.guildLoggingChannel) return;
-  const avatar = client.user.displayAvatarURL();
+  const avatar = await client.user.displayAvatarURL();
 
   try {
-    const humans = guild.members.cache.filter((member) => !member.user.bot)
+    const humans = await guild.members.cache.filter(
+      (member) => !member.user.bot
+    ).size;
+    const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
-    const bots = guild.members.cache.filter((member) => member.user.bot).size;
+    const owner = await client.users.fetch(guild.ownerID);
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "America/Chicago",
+    };
+    const time = new Date();
+    const date = time.toLocaleDateString(time, options);
 
-    let embed = new Discord.MessageEmbed()
+    let embed = await new Discord.MessageEmbed()
       .setColor(config.mainColor)
       .setAuthor(`Joined ${guild.name}!`)
-      .setDescription(
-        `**Owner:** ${guild.owner.user.tag}\n**Owner ID:** ${guild.ownerID}\n**Server ID:** ${guild.id}\n**Total Members:** ${guild.memberCount}\n**Humans:** ${humans}\n**Bots:** ${bots}`
+      .setThumbnail(guild.iconURL())
+      .addField(`👑 Owner:`, `**Owner:** ${owner.tag}`)
+      .addField(
+        `📄 Info:`,
+        `**Total Members:** ${guild.members.cache.size}\n**Humans:** ${humans}\n**Bots:** ${bots}`
       )
-      .setThumbnail(guild.iconURL());
+      .setFooter(`Joined at ${date}`);
 
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
-
-    console.log(
-      guild.channels.cache
-        .filter(
-          (channel) =>
-            channel.type === "text" && channel.permissionsFor(guild.me)
-        )
-        .forEach((c) => console.log(c.name))
-        .first()
-    );
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);
+    logger.log(`error`, `e`);
   }
 });
 
-client.on("guildDelete", (guild) => {
+client.on("guildDelete", async (guild) => {
   if (!config.guildLoggingChannel) return;
-  const avatar = client.user.displayAvatarURL();
+  const avatar = await client.user.displayAvatarURL();
 
   try {
-    const humans = guild.members.cache.filter((member) => !member.user.bot)
+    const humans = await guild.members.cache.filter(
+      (member) => !member.user.bot
+    ).size;
+    const bots = await guild.members.cache.filter((member) => member.user.bot)
       .size;
-    const bots = guild.members.cache.filter((member) => member.user.bot).size;
+    const owner = await client.users.fetch(guild.ownerID);
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "America/Chicago",
+    };
+    const time = new Date();
+    const date = time.toLocaleDateString(time, options);
 
-    let embed = new Discord.MessageEmbed()
+    let embed = await new Discord.MessageEmbed()
       .setColor(config.errorColor)
       .setAuthor(`Left ${guild.name}`)
-      .setDescription(
-        `**Owner:** ${guild.owner.user.tag}\n**Owner ID:** ${guild.ownerID}\n**Server ID:** ${guild.id}\n**Total Members:** ${guild.memberCount}\n**Humans:** ${humans}\n**Bots:** ${bots}`
+      .setThumbnail(guild.iconURL())
+      .addField(`👑 Owner:`, `**Owner:** ${owner.tag}`)
+      .addField(
+        `📄 Info:`,
+        `**Total Members:** ${guild.members.cache.size}\n**Humans:** ${humans}\n**Bots:** ${bots}`
       )
-      .setThumbnail(guild.iconURL());
+      .setFooter(`Left at ${date}`);
 
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);
+    logger.log(`error`, `e`);
   }
 });
 
@@ -127,11 +153,10 @@ client.on("message", async (msg) => {
     guildPrefix = prefix;
   } else {
     const query = { guildID: msg.guild.id };
-    database = db.db("database");
+    const database = db.db("database");
     const collection = database.collection("guilds");
     const data = await collection.findOne(query);
     if (!data) {
-      console.log(`do data lul`);
       guildPrefix = prefix;
     } else {
       if (!data.prefix) {
@@ -156,14 +181,22 @@ client.on("message", async (msg) => {
   const args = msg.content.slice(guildPrefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
 
-  if (!client.commands.has(commandName)) return;
+  const command =
+    client.commands.get(commandName) ||
+    client.commands.find(
+      (cmd) => cmd.aliases && cmd.aliases.includes(commandName)
+    );
+
+  if (!command) return;
 
   const avatar = client.user.displayAvatarURL();
-  const command = client.commands.get(commandName);
 
-  Statcord.ShardingClient.postCommand(commandName, msg.author.id, client);
+  if (process.env.STATCORD_TOKEN) {
+    const Statcord = require("statcord.js");
+    Statcord.ShardingClient.postCommand(commandName, msg.author.id, client);
+  }
 
-  if (command.ownerOnly && msg.author.id !== config.ownerID) return;
+  if (command.ownerOnly && msg.author.id !== config.ownerid) return;
 
   if (command.args && !args.length) {
     let message = `You are missing some required arguments`;
@@ -173,7 +206,7 @@ client.on("message", async (msg) => {
     }
 
     let embed = new Discord.MessageEmbed()
-      .setColor(config.errorColor)
+      .setColor(config.colors.error)
       .setAuthor(`Error`, avatar)
       .setTitle(`Missing Arguments`)
       .setDescription(message);
@@ -192,7 +225,7 @@ client.on("message", async (msg) => {
       client,
       config,
       guildPrefix,
-      axios,
+      require("axios"),
       Discord,
       avatar,
       db.db("database")
@@ -200,6 +233,7 @@ client.on("message", async (msg) => {
   } catch (e) {
     const error = require("./functions/error.js");
     error.handle(e, Discord, client, msg, msg.guild, config, avatar);
+    logger.log(`error`, `e`);
   }
 });
 

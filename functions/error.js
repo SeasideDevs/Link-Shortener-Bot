@@ -47,8 +47,8 @@ module.exports = {
     });
 
     console.log(error);
-    fs.writeFile(`errors/${id}.txt`, file, function (err) {
-      return;
-    });
+    /* fs.writeFile(`errors/${id}.txt`, file, function(err) {
+      return
+    }) */
   },
 };

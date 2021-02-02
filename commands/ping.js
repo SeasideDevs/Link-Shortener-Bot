@@ -1,6 +1,7 @@
 module.exports = {
   name: "ping",
   description: "Shows the bots latency",
+  aliases: ["latency"],
   ownerOnly: false,
   guildOnly: false,
   args: false,
@@ -10,7 +11,7 @@ module.exports = {
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     async function ping() {
       const embed = await new Discord.MessageEmbed()
-        .setColor(config.mainColor)
+        .setColor(config.colors.main)
         .setAuthor(`Pong?`, avatar)
         .setDescription(`Testing connection...`);
       const m = await msg.channel.send(embed);

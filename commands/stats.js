@@ -1,6 +1,7 @@
 module.exports = {
   name: "stats",
   description: "Shows bot statistics",
+  aliases: [],
   ownerOnly: false,
   guildOnly: false,
   args: false,
@@ -8,17 +9,16 @@ module.exports = {
   usage: "",
   category: "info",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
-    const dependencies = require("../package.json");
+    const file = require("../package.json");
+    const rawDependencies = Object.entries(file.dependencies);
     const sysInfo = require("systeminformation");
-    let discordjsVersionRaw = dependencies["dependencies"]["discord.js"];
-    let axiosVersionRaw = dependencies.dependencies.axios;
-    let expressVersionRaw = dependencies.dependencies.express;
-    let sysInfoVersionRaw = dependencies.dependencies.systeminformation;
+    let dependencies = [];
+    for (const dependency of rawDependencies) {
+      const version = dependency[1].replace("^", "v");
+      const combined = `${dependency[0]}: **${version}**`;
+      dependencies.push(combined);
+    }
     // Slices the previous variable to get rid of the
-    let discordjsVersion = `v` + discordjsVersionRaw.slice(1);
-    let axiosVersion = `v` + axiosVersionRaw.slice(1);
-    let expressVersion = `v` + expressVersionRaw.slice(1);
-    let sysInfoVersion = `v` + sysInfoVersionRaw.slice(1);
     let os;
     let cpuLoad;
     let totalMemory;
@@ -56,6 +56,7 @@ module.exports = {
       let serverCount;
       let userCount;
       let channelCount;
+      let emojiCount;
 
       await client.shard
         .fetchClientValues("guilds.cache.size")
@@ -84,17 +85,23 @@ module.exports = {
           channelCount = reduced;
         });
 
+      await client.shard
+        .fetchClientValues("emojis.cache.size")
+        .then((results) => {
+          const reducer = (accumulator, shardGuilds) =>
+            accumulator + shardGuilds;
+          const reduced = results.reduce(reducer);
+          emojiCount = reduced;
+        });
+
       let embed = new Discord.MessageEmbed()
-        .setColor(config.mainColor)
+        .setColor(config.colors.main)
         .setAuthor(`Stats`, avatar)
         .addField(
           `Bot Stats`,
-          `Servers: **${serverCount}\n**Channels: **${channelCount}**\nUsers: **${userCount}**`
+          `Servers: **${serverCount}\n**Channels: **${channelCount}**\nUsers: **${userCount}**\nEmotes: **${emojiCount}**`
         )
-        .addField(
-          `Utilities`,
-          `Nodejs: **${process.version}**\nDiscord.js: **${discordjsVersion}**\nAxios: **${axiosVersion}**\nExpress: **${expressVersion}**\nSystem Information: **${sysInfoVersion}**`
-        )
+        .addField(`Utilities`, `${dependencies.join("\n")}`)
         .addField(
           `System`,
           `OS: **${os}**\nCPU: **${cpuLoad}%**\nMemory: **${percentage}% (${usingMemory}MB/${totalMemory}MB)**`

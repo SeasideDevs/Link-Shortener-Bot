@@ -2,6 +2,7 @@ module.exports = {
   name: "8ball",
   description:
     "Ask the gods a question. You can either attach the question to the command or keep it to yourself. Either will work",
+  aliases: [],
   ownerOnly: false,
   guildOnly: false,
   args: false,
@@ -37,7 +38,7 @@ module.exports = {
     let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
     const embed = new Discord.MessageEmbed()
-      .setColor(config.mainColor)
+      .setColor(config.colors.main)
       .setAuthor(`The results have come in`, avatar)
       .setDescription(`🎱 ${items[randomNum]}`);
 

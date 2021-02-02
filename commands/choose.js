@@ -2,6 +2,7 @@ module.exports = {
   name: "choose",
   description:
     "Are you unsure about something? Let Seashell choose! Seperate your items with a `|` character",
+  aliases: [],
   ownerOnly: false,
   guildOnly: false,
   args: true,
@@ -21,7 +22,7 @@ module.exports = {
     let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
     const embed = new Discord.MessageEmbed()
-      .setColor(config.mainColor)
+      .setColor(config.colors.main)
       .setAuthor(`I choose...`, avatar)
       .setDescription(`${split[randomNum]}`);
 

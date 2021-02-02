@@ -10,7 +10,6 @@ Link Shortener is a open source Discord Bot which uses various api's to shorten 
 ## Self Hosting
 
 **THE CODEBASE IS BEING IMPROVED AND WORKED ON. THERE WILL BE NO SUPPORT PROVIDED TO SELFHOSTERS UNTIL THE CODE HAS BEEN IMPROVED. YOU MAY STILL SELFHOST BUT THERE WILL BE NO SUPPORT PROVIDED**
-
 If you wish to self host you will need to make some small edits to the code before starting the bot. This guide will assume you already have a Discord Developer Application, that node.js is installed, and that you know how to install dependencies. You can use Google to find out how to do these things if you don't know how.
 
 1. Rename the example.env file and place your bot token after the `BOT_TOKEN=` part

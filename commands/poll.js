@@ -2,6 +2,7 @@ module.exports = {
   name: "poll",
   description:
     "Starts a simple yes/no poll. You can change the reactions used by adding either material, redtriangle, bluetriangle, bluearrows, block as the first argument",
+  aliases: [],
   ownerOnly: false,
   guildOnly: true,
   args: true,
@@ -11,7 +12,7 @@ module.exports = {
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     async function run() {
       let embed = new Discord.MessageEmbed()
-        .setColor(config.mainColor)
+        .setColor(config.colors.main)
         .setAuthor(`New Poll by ${msg.author.tag}!`, avatar)
         .setFooter(`Vote by clicking one of the reactions below!`);
       const subcommands = [

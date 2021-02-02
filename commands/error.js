@@ -1,6 +1,7 @@
 module.exports = {
   name: "error",
   description: "Shows the bots latency",
+  aliases: [],
   ownerOnly: true,
   guildOnly: false,
   args: true,
@@ -20,7 +21,7 @@ module.exports = {
         const guild = `**Guild Name:** ${file.guild.name}\n**Guild ID:** ${file.guild.ID}`;
 
         let embed = new Discord.MessageEmbed()
-          .setColor(config.mainColor)
+          .setColor(config.colors.main)
           .setAuthor(`Error`, avatar)
           .addField(`Date`, file.date)
           .addField(`Author`, author)

@@ -1,6 +1,7 @@
 module.exports = {
   name: "dscgg",
   description: "Gets info on a [dsc.gg](https://dsc.gg) link.",
+  aliases: [],
   ownerOnly: true,
   guildOnly: false,
   args: true,
@@ -12,9 +13,9 @@ module.exports = {
     const Link = require("dsc.js");
     const dscgg = new Link.Client(process.env.DSCGG_TOKEN);
     const input = args[0];
-    if (input.length > 25) {
+    if (input.length > 120) {
       return msg.channel.send(
-        `You cannot lookup links longer than 25 characters`
+        `You cannot lookup links longer than 120 characters`
       );
     }
 
@@ -54,7 +55,7 @@ module.exports = {
         .setTitle(`Info for Link: **${link}**`)
         .setThumbnail(data.payload.meta.image)
         .addField(`👑  Owner:`, `**Username:** ${owner.tag}`)
-        .addField(`📢  Info:`, `**Type:** ${type}\n**Redirect:** ${redirect}`)
+        .addField(`📄  Info:`, `**Type:** ${type}\n**Redirect:** ${redirect}`)
         .addField(
           `📊  Stats:`,
           `**Clicks:** ${data.payload.stats.clicks}\n**Unique Clicks:** ${data.payload.stats.unique_clicks}`
