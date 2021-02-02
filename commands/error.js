@@ -1,6 +1,7 @@
 module.exports = {
   name: "error",
   description: "Shows the bots latency",
+  aliases: [],
   ownerOnly: true,
   guildOnly: false,
   args: true,

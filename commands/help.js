@@ -1,6 +1,7 @@
 module.exports = {
   name: "help",
   description: "I think this one is self explanatory",
+  aliases: ["commands"],
   ownerOnly: false,
   guildOnly: false,
   args: false,

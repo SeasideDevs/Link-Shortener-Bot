@@ -2,6 +2,7 @@ module.exports = {
   name: "8ball",
   description:
     "Ask the gods a question. You can either attach the question to the command or keep it to yourself. Either will work",
+  aliases: [],
   ownerOnly: false,
   guildOnly: false,
   args: false,

@@ -1,6 +1,7 @@
 module.exports = {
   name: "vgd",
   description: "Shortens links using [v.gd](https://v.gd)",
+  aliases: [],
   ownerOnly: false,
   guildOnly: false,
   args: true,

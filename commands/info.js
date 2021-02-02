@@ -1,6 +1,7 @@
 module.exports = {
   name: "info",
   description: "Shows info about Seashell's and its history",
+  aliases: ["history"],
   ownerOnly: false,
   guildOnly: false,
   args: false,

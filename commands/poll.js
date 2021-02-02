@@ -2,6 +2,7 @@ module.exports = {
   name: "poll",
   description:
     "Starts a simple yes/no poll. You can change the reactions used by adding either material, redtriangle, bluetriangle, bluearrows, block as the first argument",
+  aliases: [],
   ownerOnly: false,
   guildOnly: true,
   args: true,

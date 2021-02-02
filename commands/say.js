@@ -1,6 +1,7 @@
 module.exports = {
   name: "say",
   description: "If you can't tell what this one does. Then I'm worried for you",
+  aliases: [],
   ownerOnly: true,
   guildOnly: false,
   args: false,

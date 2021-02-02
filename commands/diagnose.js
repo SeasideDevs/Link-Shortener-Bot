@@ -1,6 +1,7 @@
 module.exports = {
   name: "newdiagnose",
   description: "Diagnoses the bots current permissions",
+  aliases: [],
   ownerOnly: false,
   guildOnly: true,
   args: false,

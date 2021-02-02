@@ -1,6 +1,7 @@
 module.exports = {
   name: "imitate",
   description: "whats this?",
+  aliases: [],
   ownerOnly: true,
   guildOnly: true,
   args: true,

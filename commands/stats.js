@@ -1,7 +1,8 @@
 module.exports = {
-  name: "newstats",
+  name: "stats",
   description: "Shows bot statistics",
-  ownerOnly: true,
+  aliases: [],
+  ownerOnly: false,
   guildOnly: false,
   args: false,
   cooldown: 10,

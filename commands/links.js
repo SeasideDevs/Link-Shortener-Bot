@@ -1,6 +1,7 @@
 module.exports = {
   name: "links",
   description: "Shows various links related to the bot",
+  aliases: ["vote", "invite", "support", "trello"],
   ownerOnly: false,
   guildOnly: false,
   args: false,

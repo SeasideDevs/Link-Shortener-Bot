@@ -181,10 +181,11 @@ client.on("message", async (msg) => {
   const args = msg.content.slice(guildPrefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
 
-  if (!client.commands.has(commandName)) return;
+  const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+	if (!command) return;
 
   const avatar = client.user.displayAvatarURL();
-  const command = client.commands.get(commandName);
 
   if (process.env.STATCORD_TOKEN) {
     const Statcord = require("statcord.js");

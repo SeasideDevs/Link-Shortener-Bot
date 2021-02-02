@@ -2,6 +2,7 @@ module.exports = {
   name: "evall",
   description:
     "Runs Javascript code on all shards. This command is owner only and will not work for self hosted versions not using sharding",
+  aliases: ["ev"],
   ownerOnly: true,
   guildOnly: false,
   args: true,

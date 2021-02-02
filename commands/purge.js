@@ -1,6 +1,7 @@
 module.exports = {
   name: "purge",
   description: "Bulk deletes messages in the channel it's used in",
+  aliases: ["clear"],
   ownerOnly: true,
   guildOnly: true,
   args: true,

@@ -1,6 +1,7 @@
 module.exports = {
   name: "dscgg",
   description: "Gets info on a [dsc.gg](https://dsc.gg) link.",
+  aliases: [],
   ownerOnly: true,
   guildOnly: false,
   args: true,

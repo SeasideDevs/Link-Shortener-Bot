@@ -1,6 +1,7 @@
 module.exports = {
   name: "reload",
   description: "Reloads a command. Owner only",
+  aliases: ["r"],
   ownerOnly: true,
   guildOnly: false,
   args: true,

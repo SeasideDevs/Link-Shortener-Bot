@@ -2,6 +2,7 @@ module.exports = {
   name: "choose",
   description:
     "Are you unsure about something? Let Seashell choose! Seperate your items with a `|` character",
+  aliases: [],
   ownerOnly: false,
   guildOnly: false,
   args: true,

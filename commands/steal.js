@@ -1,6 +1,7 @@
 module.exports = {
   name: "steal",
   description: "Steal emojis",
+  aliases: [],
   ownerOnly: true,
   guildOnly: true,
   args: true,
