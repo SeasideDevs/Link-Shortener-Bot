@@ -1,7 +1,7 @@
 {
   "name": "Seashell",
   "version": "6.0.0",
-  "description": "Seashell is a small multipurpose bot",
+  "description": "Seashell is a small multipurpose Discord bot",
   "main": "index.js",
   "dependencies": {
     "@sentry/node": "^5.29.2",
