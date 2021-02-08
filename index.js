@@ -1,11 +1,11 @@
-const { ShardingManager } = require("discord.js");
+const {ShardingManager} = require("discord.js");
 const Statcord = require("statcord.js");
 const token = process.env.BOT_TOKEN;
 const statcordToken = process.env.STATCORD_TOKEN;
 let statcord;
-const manager = new ShardingManager("./bot.js", { token: token });
+const manager = new ShardingManager("./bot.js", {token: token});
 const chalk = require("chalk");
-require("toml-require").install({ toml: require("toml") });
+require("toml-require").install({toml: require("toml")});
 const config = require("./config.toml");
 const logger = require("./functions/logger.js");
 

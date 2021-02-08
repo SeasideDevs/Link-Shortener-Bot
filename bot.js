@@ -5,17 +5,17 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 const fs = require("fs");
-const { MongoClient } = require("mongodb");
-const db = new MongoClient(process.env.DB_URL, { useUnifiedTopology: true });
+const {MongoClient} = require("mongodb");
+const db = new MongoClient(process.env.DB_URL, {useUnifiedTopology: true});
 const Discord = require("discord.js");
 const client = new Discord.Client({
   disableMentions: "everyone",
 });
-require("toml-require").install({ toml: require("toml") });
+require("toml-require").install({toml: require("toml")});
 const config = require("./config.toml");
 const prefix = config.prefix;
 const status = {
-  activity: { name: "test", type: "WATCHING" },
+  activity: {name: "test", type: "WATCHING"},
   status: "online",
 };
 const chalk = require("chalk");
@@ -152,7 +152,7 @@ client.on("message", async (msg) => {
   if (!msg.guild) {
     guildPrefix = prefix;
   } else {
-    const query = { guildID: msg.guild.id };
+    const query = {guildID: msg.guild.id};
     const database = db.db("database");
     const collection = database.collection("guilds");
     const data = await collection.findOne(query);

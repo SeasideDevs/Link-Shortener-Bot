@@ -12,12 +12,12 @@ module.exports = {
     const collection = database.collection("guilds");
 
     async function run() {
-      const data = await collection.findOne({ guildID: msg.guild.id });
+      const data = await collection.findOne({guildID: msg.guild.id});
       console.log(data);
       if (!data) {
         return msg.channel.send(`No data found for guild yet`);
       } else {
-        const filter = { guildID: msg.guild.id };
+        const filter = {guildID: msg.guild.id};
         const updatedDocument = {
           $set: {
             prefix: args[0],

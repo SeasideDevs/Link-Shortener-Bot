@@ -9,7 +9,7 @@ module.exports = {
   usage: "",
   category: "info",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
-    const { commands } = msg.client;
+    const {commands} = msg.client;
 
     if (!args.length) {
       const embed = new Discord.MessageEmbed().setColor(config.colors.main);
