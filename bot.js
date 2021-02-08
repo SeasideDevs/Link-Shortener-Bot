@@ -15,7 +15,7 @@ require("toml-require").install({ toml: require("toml") });
 const config = require("./config.toml");
 const prefix = config.prefix;
 const status = {
-  activity: { name: "code", type: "WATCHING" },
+  activity: { name: "you", type: "WATCHING" },
   status: "online",
 };
 const chalk = require("chalk");
