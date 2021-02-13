@@ -8,10 +8,11 @@ error = "fd6868"
 success = "✅"
 error = "❌"
 [logging]
-guild-join-leave = true
+guildjoin = true
+guildleave = true
 system = true
 username = "Seashell Nightly"
-avatar = "https://cdn.discordapp.com/avatars/755911044177854586/499f4627779c97d1b14349cfe9eed178.png"
+avatar = "https://cdn.discordapp.com/avatars/755911044177854586/6e8984122a4c0aa64e4890c874de63c5.webp"
 [httpserver]
 enabled = true
 port = 3000
