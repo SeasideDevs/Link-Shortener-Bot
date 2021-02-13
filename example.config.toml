@@ -11,8 +11,8 @@ error = "❌"
 guildjoin = true
 guildleave = true
 system = true
-username = "Seashell Nightly"
-avatar = "https://cdn.discordapp.com/avatars/755911044177854586/6e8984122a4c0aa64e4890c874de63c5.webp"
+username = "Webhook Username"
+avatar = "Link to image used as the webhook avatar"
 [httpserver]
 enabled = true
 port = 3000

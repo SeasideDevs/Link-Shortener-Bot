@@ -1,7 +1,7 @@
 module.exports = {
   name: "eval",
   description:
-    "Runs Javascript code on the shard its used on. Or acts like a normal eval without sharding. Owner only",
+    "Runs Javascript code on the shard its used on. Owner only",
   aliases: ["e"],
   ownerOnly: true,
   guildOnly: false,
