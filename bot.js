@@ -19,7 +19,7 @@ const status = {
   status: "online",
 };
 const chalk = require("chalk");
-const blapi = require("blapi");
+//const blapi = require("blapi");
 const logger = require("./functions/logger.js");
 
 //blapi.handle(client, apikeys, 120)
@@ -71,7 +71,7 @@ client.on("ready", () => {
 
 // Fires when a new message is received
 client.on("guildCreate", async (guild) => {
-  if (!config.guildLoggingChannel) return;
+  if (!config.logging.guildjoin || !process.env.GUILD_JOIN_WEBHOOK) return;
   const avatar = await client.user.displayAvatarURL();
 
   try {
@@ -110,7 +110,7 @@ client.on("guildCreate", async (guild) => {
 });
 
 client.on("guildDelete", async (guild) => {
-  if (!config.guildLoggingChannel) return;
+  if (!config.logging.guildleave || !process.env.GUILD_LEAVE_WEBHOOK) return;
   const avatar = await client.user.displayAvatarURL();
 
   try {
@@ -141,6 +141,7 @@ client.on("guildDelete", async (guild) => {
       )
       .setFooter(`Left at ${date}`);
 
+    
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);

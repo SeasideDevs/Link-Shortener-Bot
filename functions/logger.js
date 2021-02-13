@@ -50,6 +50,6 @@ module.exports = {
       username: config.logging.username,
       avatar_url: config.logging.avatar,
     };
-    axios.post(process.env.WEBHOOK_URL, data);
+    axios.post(process.env.LOGGING_WEBHOOK, data);
   },
 };
