@@ -59,7 +59,7 @@ module.exports = {
       if (msg.author.id === config.ownerid) {
         let ownerJoined = `\`${owner.join(" ")}\``;
         if (owner.length === 0) {
-          ownerJoined = `No Commands In This Category`;
+          ownerJoined = `No commands in this category`;
         }
         embed.addField(`Owner`, ownerJoined);
       }
