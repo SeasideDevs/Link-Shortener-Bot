@@ -3,7 +3,7 @@ on:
   # Run the workflow on a push to the nightly branch
   push:
     branches:
-      - nightly
+      - '!main'
    # Run the workflow on a pull request to the main branch
   pull_request:
     branches:
