@@ -53,16 +53,15 @@ module.exports = {
 
     if (!args.size) {
       let embed = new Discord.MessageEmbed()
-      .setColor(config.colors.main)
-      .setTitle(`Commands`);
+        .setColor(config.colors.main)
+        .setTitle(`Commands`);
 
-    for (category of categories) {
-      const e = categories.indexOf(category);
-      console.log(e);
+      for (category of categories) {
+        const e = categories.indexOf(category);
+        console.log(e);
+      }
+      
     }
-    }
-
-    
 
     /* if (args) {
 
