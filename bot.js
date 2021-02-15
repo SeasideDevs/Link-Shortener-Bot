@@ -170,7 +170,7 @@ client.on("message", async (msg) => {
 
   if (msg.content === `<@!${client.user.id}>`) {
     msg.channel.send(
-      `Hey I'm ${client.user.username}! My prefix here is **${guildPrefix}**.`
+      `Hey I'm ${client.user.username}! My prefix here is **${guildPrefix}**`
     );
   }
   // If the command doesn't start with the prefix or is sent by a bot return
