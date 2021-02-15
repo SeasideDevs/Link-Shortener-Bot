@@ -141,7 +141,6 @@ client.on("guildDelete", async (guild) => {
       )
       .setFooter(`Left at ${date}`);
 
-    
     client.channels.cache.get(config.guildLoggingChannel).send(embed);
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);
