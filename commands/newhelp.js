@@ -52,13 +52,16 @@ module.exports = {
     ];
 
     if (!args.size) {
+      const sortedCommands
       let embed = new Discord.MessageEmbed()
         .setColor(config.colors.main)
         .setTitle(`Commands`);
 
       for (category of categories) {
-        const e = categories.indexOf(category);
-        console.log(e);
+        sortedCommands.push({
+          name: category.name,
+          commands: []
+        });
       }
       
     }
