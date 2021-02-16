@@ -1,7 +1,7 @@
 module.exports = {
   name: "newhelp",
   description: "I think this one is self explanatory",
-  aliases: ["newcommands"],
+  aliases: ["newcommands", "nh"],
   ownerOnly: false,
   guildOnly: false,
   args: false,
@@ -68,8 +68,15 @@ module.exports = {
         });
       }
 
+      console.log(sortedCommands)
+
       commands.forEach((command) => {
-        const categoryIndex = categoryNames.indexOf(command.category);
+        let categoryIndex = categoryNames.indexOf(command.category);
+        console.log(categoryIndex)
+        if (categoryIndex === -1) {
+          console.log(command.name)
+          categoryIndex = sortedCommands.length - 1;
+        }
         sortedCommands[categoryIndex].commands.push(command.name);
       });
 
@@ -77,10 +84,12 @@ module.exports = {
         const categoryIndex = categoryNames.indexOf(category.name);
         let fieldValue = sortedCommands[categoryIndex].commands.join(" ");
         if (!fieldValue) {
-          filedValue = "No commands in this category";
+          fieldValue = "No commands in this category";
         }
-        embed.addField(category.name, fieldValue);
+        embed.addField(category.friendlyName, fieldValue);
       }
+
+      msg.channel.send(embed)
     }
 
     /* if (args) {
