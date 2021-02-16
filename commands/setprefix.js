@@ -1,5 +1,5 @@
 module.exports = {
-  name: "prefix",
+  name: "setprefix",
   description: "Show the prefix of the bot or updates it",
   aliases: [""],
   ownerOnly: false,
@@ -7,7 +7,7 @@ module.exports = {
   args: true,
   cooldown: 3,
   usage: "<>",
-  category: "utility",
+  category: "config",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     const collection = database.collection("guilds");
 

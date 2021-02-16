@@ -70,12 +70,13 @@ module.exports = {
 
       commands.forEach((command) => {
         let categoryIndex = categoryNames.indexOf(command.category);
+        if (command.ownerOnly) {
+          return sortedCommands[0].commands.push(`\`${command.name}\``)
+        }
         if (categoryIndex === -1) {
-          //console.log(command.name, categoryIndex, command.category)
-          //console.log(command.category)
           categoryIndex = sortedCommands.length - 1;
         }
-        sortedCommands[categoryIndex].commands.push(command.name);
+        sortedCommands[categoryIndex].commands.push(`\`${command.name}\``);
       });
 
       for (category of categories) {
