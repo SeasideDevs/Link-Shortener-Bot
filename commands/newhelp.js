@@ -68,13 +68,11 @@ module.exports = {
         });
       }
 
-      console.log(sortedCommands)
-
       commands.forEach((command) => {
         let categoryIndex = categoryNames.indexOf(command.category);
-        console.log(categoryIndex)
         if (categoryIndex === -1) {
-          console.log(command.name)
+          //console.log(command.name, categoryIndex, command.category)
+          //console.log(command.category)
           categoryIndex = sortedCommands.length - 1;
         }
         sortedCommands[categoryIndex].commands.push(command.name);
