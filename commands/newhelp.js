@@ -51,19 +51,36 @@ module.exports = {
       },
     ];
 
+    // Runs if there isnt any arguments
     if (!args.size) {
-      const sortedCommands
+      // Declares the variable that is going to contain the categories and their commands
+      let sortedCommands = [];
+      const categoryNames = categories.map((category) => category.name);
+      // The inital embed
       let embed = new Discord.MessageEmbed()
         .setColor(config.colors.main)
         .setTitle(`Commands`);
-
+      // Adds a object to the sortedCommands variable with an empty commands array
       for (category of categories) {
         sortedCommands.push({
           name: category.name,
-          commands: []
+          commands: [],
         });
       }
-      
+
+      commands.forEach((command) => {
+        const categoryIndex = categoryNames.indexOf(command.category);
+        sortedCommands[categoryIndex].commands.push(command.name);
+      });
+
+      for (category of categories) {
+        const categoryIndex = categoryNames.indexOf(category.name);
+        let fieldValue = sortedCommands[categoryIndex].commands.join(" ");
+        if (!fieldValue) {
+          filedValue = "No commands in this category";
+        }
+        embed.addField(category.name, fieldValue);
+      }
     }
 
     /* if (args) {
