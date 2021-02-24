@@ -20,7 +20,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node ."
+    "start": "node ."
   },
   "keywords": [
     "discord",
