@@ -1,3 +1,4 @@
-/errors
+node_modules
 .env
 /commands/create.js
+config.toml

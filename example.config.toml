@@ -8,10 +8,11 @@ error = "fd6868"
 success = "✅"
 error = "❌"
 [logging]
-guild-join-leave = true
+guildjoin = true
+guildleave = true
 system = true
-username = "Seashell Nightly"
-avatar = "https://cdn.discordapp.com/avatars/755911044177854586/499f4627779c97d1b14349cfe9eed178.png"
+username = "Webhook Username"
+avatar = "Link to image used as the webhook avatar"
 [httpserver]
 enabled = true
 port = 3000

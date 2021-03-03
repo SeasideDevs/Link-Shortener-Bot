@@ -58,9 +58,9 @@ module.exports = {
       "z",
     ];
     let count;
-    let string = "e";
+    let string = "";
 
-    for (count = 0; count <= length; count++) {
+    for (count = 1; count <= length; count++) {
       const randomNum = Math.floor(Math.random() * letters.length);
       string += letters[randomNum];
     }

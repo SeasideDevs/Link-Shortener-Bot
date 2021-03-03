@@ -4,7 +4,7 @@ module.exports = {
     const random = require("./random.js");
     const id = random.generateString(5);
     const embed = new Discord.MessageEmbed()
-      .setColor(config.errorColor)
+      .setColor(config.colors.error)
       .setAuthor(`Error`, avatar)
       .setDescription(
         `An error occurred while attempting to run your command. Make sure I have the required permissions with \`${guildPrefix}diagnose\`. If this continues happening please report this error ID to the [support server](https://dsc.gg/sea).`

@@ -15,11 +15,11 @@ require("toml-require").install({ toml: require("toml") });
 const config = require("./config.toml");
 const prefix = config.prefix;
 const status = {
-  activity: { name: "you", type: "WATCHING" },
+  activity: { name: "test", type: "WATCHING" },
   status: "online",
 };
 const chalk = require("chalk");
-const blapi = require("blapi");
+//const blapi = require("blapi");
 const logger = require("./functions/logger.js");
 
 //blapi.handle(client, apikeys, 120)
@@ -71,7 +71,7 @@ client.on("ready", () => {
 
 // Fires when a new message is received
 client.on("guildCreate", async (guild) => {
-  if (!config.guildLoggingChannel) return;
+  if (!config.logging.guildjoin || !process.env.GUILD_JOIN_WEBHOOK) return;
   const avatar = await client.user.displayAvatarURL();
 
   try {
@@ -90,9 +90,8 @@ client.on("guildCreate", async (guild) => {
     };
     const time = new Date();
     const date = time.toLocaleDateString(time, options);
-
-    let embed = await new Discord.MessageEmbed()
-      .setColor(config.mainColor)
+    const embed = await new Discord.MessageEmbed()
+      .setColor(config.colors.main)
       .setAuthor(`Joined ${guild.name}!`)
       .setThumbnail(guild.iconURL())
       .addField(`👑 Owner:`, `**Owner:** ${owner.tag}`)
@@ -102,7 +101,15 @@ client.on("guildCreate", async (guild) => {
       )
       .setFooter(`Joined at ${date}`);
 
-    client.channels.cache.get(config.guildLoggingChannel).send(embed);
+    const embedJSON = embed.toJSON();
+    const data = {
+      username: client.user.username,
+      avatar_url: avatar,
+      content: null,
+      embeds: [embedJSON],
+    };
+
+    require("axios").post(process.env.GUILD_JOIN_WEBHOOK, data);
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);
     logger.log(`error`, `e`);
@@ -110,7 +117,7 @@ client.on("guildCreate", async (guild) => {
 });
 
 client.on("guildDelete", async (guild) => {
-  if (!config.guildLoggingChannel) return;
+  if (!config.logging.guildleave || !process.env.GUILD_LEAVE_WEBHOOK) return;
   const avatar = await client.user.displayAvatarURL();
 
   try {
@@ -130,8 +137,8 @@ client.on("guildDelete", async (guild) => {
     const time = new Date();
     const date = time.toLocaleDateString(time, options);
 
-    let embed = await new Discord.MessageEmbed()
-      .setColor(config.errorColor)
+    const embed = await new Discord.MessageEmbed()
+      .setColor(config.colors.error)
       .setAuthor(`Left ${guild.name}`)
       .setThumbnail(guild.iconURL())
       .addField(`👑 Owner:`, `**Owner:** ${owner.tag}`)
@@ -141,7 +148,15 @@ client.on("guildDelete", async (guild) => {
       )
       .setFooter(`Left at ${date}`);
 
-    client.channels.cache.get(config.guildLoggingChannel).send(embed);
+    const embedJSON = embed.toJSON();
+    const data = {
+      username: client.user.username,
+      avatar_url: avatar,
+      content: null,
+      embeds: [embedJSON],
+    };
+
+    require("axios").post(process.env.GUILD_JOIN_WEBHOOK, data);
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);
     logger.log(`error`, `e`);
@@ -169,7 +184,7 @@ client.on("message", async (msg) => {
 
   if (msg.content === `<@!${client.user.id}>`) {
     msg.channel.send(
-      `Hey I'm ${client.user.username}! My prefix here is **${guildPrefix}**.`
+      `Hey I'm ${client.user.username}! My prefix here is **${guildPrefix}**`
     );
   }
   // If the command doesn't start with the prefix or is sent by a bot return

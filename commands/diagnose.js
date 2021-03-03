@@ -1,5 +1,5 @@
 module.exports = {
-  name: "newdiagnose",
+  name: "diagnose",
   description: "Diagnoses the bots current permissions",
   aliases: [],
   ownerOnly: false,
