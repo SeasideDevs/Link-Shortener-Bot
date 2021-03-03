@@ -90,9 +90,8 @@ client.on("guildCreate", async (guild) => {
     };
     const time = new Date();
     const date = time.toLocaleDateString(time, options);
-
-    let embed = await new Discord.MessageEmbed()
-      .setColor(config.mainColor)
+    const embed = await new Discord.MessageEmbed()
+      .setColor(config.colors.main)
       .setAuthor(`Joined ${guild.name}!`)
       .setThumbnail(guild.iconURL())
       .addField(`👑 Owner:`, `**Owner:** ${owner.tag}`)
@@ -102,7 +101,15 @@ client.on("guildCreate", async (guild) => {
       )
       .setFooter(`Joined at ${date}`);
 
-    client.channels.cache.get(config.guildLoggingChannel).send(embed);
+    const embedJSON = embed.toJSON();
+    const data = {
+      username: client.user.username,
+      avatar_url: avatar,
+      content: null,
+      embeds: [embedJSON],
+    };
+
+    require("axios").post(process.env.GUILD_JOIN_WEBHOOK, data);
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);
     logger.log(`error`, `e`);
@@ -130,8 +137,8 @@ client.on("guildDelete", async (guild) => {
     const time = new Date();
     const date = time.toLocaleDateString(time, options);
 
-    let embed = await new Discord.MessageEmbed()
-      .setColor(config.errorColor)
+    const embed = await new Discord.MessageEmbed()
+      .setColor(config.colors.error)
       .setAuthor(`Left ${guild.name}`)
       .setThumbnail(guild.iconURL())
       .addField(`👑 Owner:`, `**Owner:** ${owner.tag}`)
@@ -141,7 +148,15 @@ client.on("guildDelete", async (guild) => {
       )
       .setFooter(`Left at ${date}`);
 
-    client.channels.cache.get(config.guildLoggingChannel).send(embed);
+    const embedJSON = embed.toJSON();
+    const data = {
+      username: client.user.username,
+      avatar_url: avatar,
+      content: null,
+      embeds: [embedJSON],
+    };
+
+    require("axios").post(process.env.GUILD_JOIN_WEBHOOK, data);
   } catch (e) {
     console.log(chalk.bgRedBright(`ERROR`), e);
     logger.log(`error`, `e`);
