@@ -3,6 +3,14 @@ const Tracing = require("@sentry/tracing");
 Sentry.init({
   dsn: process.env.SENTRY_TOKEN,
   tracesSampleRate: 1.0,
+  beforeSend(event) {
+    // Modify the event here
+    if (config.environment !== "production") {
+      // Don't send the event
+      return null;
+    }
+    return event;
+  },
 });
 const fs = require("fs");
 const { MongoClient } = require("mongodb");
