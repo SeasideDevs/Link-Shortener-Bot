@@ -1,6 +1,7 @@
 ownerid = "enter the owner id here"
 prefix = "s!"
 version = "1.0"
+enviorement = "production"
 [colors]
 main = "2ECC71"
 error = "fd6868"
