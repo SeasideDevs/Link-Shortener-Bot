@@ -13,7 +13,7 @@ module.exports = {
     let returned = ``;
     let success;
     const embed = new Discord.MessageEmbed()
-      .addField(`📤 Original Code`, code)
+      .addField(`📤 Original Code`, "```javascript\n" + code + "```")
       .setFooter(`Requested by ${msg.author.tag}`);
 
     async function run() {
@@ -25,16 +25,16 @@ module.exports = {
           let rawReturned = await eval(code);
           returned += rawReturned;
         }
-        embed.addField(`📥 Result`, returned);
-        embed.setAuthor(`Success!`, avatar);
         embed.setColor(config.colors.main);
+        embed.setAuthor(`Success!`, avatar);
+        embed.addField(`📥 Result`, "```javascript\n" + returned + "```");
         msg.react(config.emojis.success);
       } catch (e) {
         returned += e;
 
-        embed.addField(`📥 Result`, returned);
-        embed.setAuthor(`Error`, avatar);
         embed.setColor(config.colors.error);
+        embed.setAuthor(`Error`, avatar);
+        embed.addField(`📥 Result`, "```javacript\n" + returned + "```");
         msg.react(config.emojis.error);
       }
       msg.channel.send(embed);

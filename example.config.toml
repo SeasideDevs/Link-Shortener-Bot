@@ -1,8 +1,9 @@
 ownerid = "enter the owner id here"
 prefix = "s!"
 version = "1.0"
+enviorement = "production"
 [colors]
-main = "2ECC71"
+main = "4fc1e9"
 error = "fd6868"
 [emojis]
 success = "✅"

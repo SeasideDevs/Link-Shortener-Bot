@@ -28,7 +28,6 @@ module.exports = {
       let osResponse;
       let cpuResponse;
       let memResponse;
-      let percenteage;
 
       await sysInfo
         .mem()
@@ -49,7 +48,7 @@ module.exports = {
         .then((data) => (cpuResponse = data))
         .catch((error) => console.log(error));
 
-      cpuLoad = Math.round(cpuResponse.currentload);
+      cpuLoad = Math.round(cpuResponse.currentLoad);
 
       os = osResponse.distro;
 
@@ -92,8 +91,7 @@ module.exports = {
             accumulator + shardGuilds;
           const reduced = results.reduce(reducer);
           emojiCount = reduced;
-        });
-
+        });     
       let embed = new Discord.MessageEmbed()
         .setColor(config.colors.main)
         .setAuthor(`Stats`, avatar)
