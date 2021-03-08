@@ -27,7 +27,6 @@ module.exports = {
       embed.addField(`📥 Stdout`, "```bash\n" + returned.stdout + "```");
       msg.react(config.emojis.success);
       embed.addField(`🔢 Exit Code`, "```bash\n" + returned.exitCode + "```");
-      console.log(returned);
     } catch (e) {
       embed.setColor(config.colors.error);
       embed.setAuthor(`Error`, avatar);
