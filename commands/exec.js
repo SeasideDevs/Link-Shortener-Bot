@@ -24,12 +24,15 @@ module.exports = {
 
       embed.setColor(config.colors.main);
       embed.setAuthor(`Success!`, avatar);
-      embed.addField(`📥 Result`, "```bash\n" + returned.stdout + "```");
+      embed.addField(`📥 Stdout`, "```bash\n" + returned.stdout + "```");
       msg.react(config.emojis.success);
+      embed.addField(`🔢 Exit Code`, "```bash\n" + returned.exitCode + "```");
+      console.log(returned);
     } catch (e) {
       embed.setColor(config.colors.error);
       embed.setAuthor(`Error`, avatar);
-      embed.addField(`📥 Result`, "```bash\n" + e.stderr + "```");
+      embed.addField(`📥 Stderr`, "```bash\n" + e.stderr + "```");
+      embed.addField(`🔢 Exit Code`, "```bash\n" + e.exitCode + "```");
       msg.react(config.emojis.error);
     }
     msg.channel.send(embed);
