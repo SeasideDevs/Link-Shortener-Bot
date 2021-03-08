@@ -11,6 +11,7 @@
     "chalk": "^4.1.0",
     "discord.js": "^12.5.1",
     "dsc.js": "^1.0.4",
+    "execa": "^5.0.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.3",
     "statcord.js": "^3.1.3",
