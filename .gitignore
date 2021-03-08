@@ -1,4 +1,5 @@
 node_modules
 .env
-/commands/create.js
 config.toml
+/commands/create.js
+/commands/filecoffee.js

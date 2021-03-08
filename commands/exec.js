@@ -1,12 +1,12 @@
 module.exports = {
   name: "exec",
   description: "Execututes the commands provided. Owner only",
-  aliases: ["e"],
+  aliases: ["ex"],
   ownerOnly: true,
   guildOnly: false,
   args: true,
   cooldown: 3,
-  usage: "<code>",
+  usage: "<commandcl>",
   category: "utility",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     const execa = require("execa");
