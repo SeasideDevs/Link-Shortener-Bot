@@ -18,6 +18,13 @@ const db = new MongoClient(process.env.DB_URL, { useUnifiedTopology: true });
 const Discord = require("discord.js");
 const client = new Discord.Client({
   disableMentions: "everyone",
+  ws: {
+    intents: [
+      "GUILDS",
+      "GUILD_MESSAGES",
+      "DIRECT_MESSAGES",
+    ],
+  },
 });
 require("toml-require").install({ toml: require("toml") });
 const config = require("./config.toml");
