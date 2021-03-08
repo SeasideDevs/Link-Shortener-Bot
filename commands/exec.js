@@ -6,7 +6,7 @@ module.exports = {
   guildOnly: false,
   args: true,
   cooldown: 3,
-  usage: "<commandcl>",
+  usage: "<command>",
   category: "utility",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     const execa = require("execa");
