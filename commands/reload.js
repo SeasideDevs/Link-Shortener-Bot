@@ -10,7 +10,9 @@ module.exports = {
   category: "utility",
   execute(msg, args, client, config, prefix, axios, Discord, avatar, database) {
     const commandName = args[0].toLowerCase();
-    const command = msg.client.commands.find((cmd) => cmd.name === commandName);
+    const command = msg.client.commands.find(
+      (cmd) => cmd.name === commandName || cmd.aliases.includes(commandName)
+    );
 
     if (!command)
       return msg.channel.send(`There is no command with the name provided`);
