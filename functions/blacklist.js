@@ -1,9 +1,19 @@
-const { Modules } = require("@sentry/node/dist/integrations");
+module.exports = {
+  async check(userID, database) {
+    const result = await database.findOne({
+      userID: userID,
+    });
 
-Modules.exports = {
-  check(userID, database) {
-    console.log(userid);
+    if (!result) {
+      return false;
+    }
+
+    return result;
   },
-  add() {},
-  remove() {},
+  async add(userID, database, reason, moderator, appealable, blacklistedAt, ignoreUser) {
+    if (!this.check(userID, database)) {
+      return "wow already blacklisted"
+    }
+  },
+  async remove() {},
 };
