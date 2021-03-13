@@ -193,7 +193,7 @@ client.on("message", async (msg) => {
     }
   }
 
-  if (msg.content === `<@!${client.user.id}>`) {
+  if (msg.content === `<@!${client.user.id}>` && !msg.author.bot) {
     msg.channel.send(
       `Hey I'm ${client.user.username}! My prefix here is **${guildPrefix}**`
     );
