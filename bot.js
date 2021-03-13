@@ -25,10 +25,6 @@ const client = new Discord.Client({
 require("toml-require").install({ toml: require("toml") });
 const config = require("./config.toml");
 const prefix = config.prefix;
-const status = {
-  activity: { name: "test", type: "WATCHING" },
-  status: "online",
-};
 const chalk = require("chalk");
 //const blapi = require("blapi");
 const logger = require("./functions/logger.js");
@@ -67,17 +63,29 @@ async function dbConnect() {
 
 dbConnect();
 
+if (config["status"]["random-statuses"]) {
+  setInterval(() => {}, 20000);
+}
+
 client.on("ready", () => {
   console.log(chalk.yellow(`INFO`), `Logged in as ${client.user.tag}!`);
   logger.log(`info`, `Logged in as ${client.user.tag}!`);
 
-  client.user
-    .setPresence(status)
-    .then(function (response) {
-      console.log(chalk.yellow(`INFO`), `Status Set`);
-      logger.log(`info`, `Status Set`);
-    })
-    .catch(console.error);
+  if (status["main-status"]) {
+    client.user
+      .setPresence({
+        status: config["status"]["main"]["status-type"],
+        activity: {
+          name: config["status"]["main"]["text"],
+          type: config["status"]["main"]["type"],
+        },
+      })
+      .then(function (response) {
+        console.log(chalk.yellow(`INFO`), `Status Set`);
+        logger.log(`info`, `Status Set`);
+      })
+      .catch(console.error);
+  }
 });
 
 // Fires when a new message is received
