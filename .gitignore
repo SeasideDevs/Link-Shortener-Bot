@@ -3,4 +3,3 @@ node_modules
 config.toml
 /commands/create.js
 /commands/filecoffee.js
-/commands/ree.js
