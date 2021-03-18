@@ -30,10 +30,7 @@ const status = {
   status: "online",
 };
 const chalk = require("chalk");
-//const blapi = require("blapi");
 const logger = require("./functions/logger.js");
-
-//blapi.handle(client, apikeys, 120)
 
 // Makes a new collection with all the files in /commands
 
