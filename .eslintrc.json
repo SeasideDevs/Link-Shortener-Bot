@@ -6,8 +6,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "plugin:prettier/recommended"
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -17,6 +16,7 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "array-bracket-spacing": [
+      "error",
       "always",
       { "singleValue": true, "objectsInArrays": true }
     ],
