@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/TheLimifiedLime/Seashell-Rewrite/issues"
   },
-  "homepage": "https://github.com/TheLimifiedLime/Seashell-Rewrite#readme"
+  "homepage": "https://github.com/TheLimifiedLime/Seashell-Rewrite#readme",
+  "devDependencies": {
+    "prettier": "2.2.1"
+  }
 }
