@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,8 @@
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
     "prettier": "2.2.1"
   }
 }
