@@ -28,5 +28,11 @@
     "lint-staged": "^10.5.4",
     "prettier": "2.2.1",
     "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "bufferutil": "^4.0.3",
+    "discord.js": "^12.5.1",
+    "erlpack": "github:discord/erlpack",
+    "utf-8-validate": "^5.0.4"
   }
 }
