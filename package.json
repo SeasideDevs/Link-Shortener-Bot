@@ -2,9 +2,8 @@
   "name": "seashell",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node build/index.js"
   },
   "repository": {
     "type": "git",
