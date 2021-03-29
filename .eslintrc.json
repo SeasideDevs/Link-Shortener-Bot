@@ -16,7 +16,21 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-      "curly": "error",
-      "dot-notation": "error"
+    "array-bracket-spacing": [
+      "always",
+      { "singleValue": true, "objectsInArrays": true }
+    ],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "no-trailing-spaces": ["error", { "skipBlankLines": false }],
+    "eqeqeq": ["error", "always"],
+    "arrow-body-style": ["error", "always"],
+    "capitalized-comments": ["error", "always"],
+    "arrow-parens": ["error", "always"],
+    "curly": "error",
+    "dot-notation": "error",
+    "no-alert": "error",
+    "no-empty-function": "error",
+    "no-var": "error",
+    "prefer-const": "error"
   }
 }
