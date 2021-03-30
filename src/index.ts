@@ -10,3 +10,5 @@ const manager = new ShardingManager(__dirname + "/bot.js", {
 });
 
 manager.spawn();
+
+export { config }
