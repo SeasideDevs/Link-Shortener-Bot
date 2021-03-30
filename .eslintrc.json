@@ -16,7 +16,7 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "array-bracket-spacing": [
-      "error",
+      "warn",
       "always",
       { "singleValue": true, "objectsInArrays": true }
     ],
@@ -24,7 +24,7 @@
     "no-trailing-spaces": ["error", { "skipBlankLines": false }],
     "eqeqeq": ["error", "always"],
     "arrow-body-style": ["error", "always"],
-    "capitalized-comments": ["error", "always"],
+    "capitalized-comments": ["warn", "always"],
     "arrow-parens": ["error", "always"],
     "curly": "error",
     "dot-notation": "error",
