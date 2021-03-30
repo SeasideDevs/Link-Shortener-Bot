@@ -1,0 +1,7 @@
+[basic]
+owner-ids = ["owner0", "owner1", "owner2"]
+prefixes = ["prefix0", "prefix1", "prefix2"]
+[colors]
+main = "4fc1e9"
+warn = "fd6868"
+error = "fd6868"
