@@ -1,6 +1,5 @@
 import { type } from "os";
 
-export function checks(config: any): null {
-  console.log(config);
+export function checks(): null {
   return null;
 }
