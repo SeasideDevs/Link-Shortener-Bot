@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "dev": "npx tsc && node build/index.js",
     "build": "npx tsc",
     "start": "node build/index.js"
   },
