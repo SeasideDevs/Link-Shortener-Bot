@@ -1,6 +1,8 @@
-import { type } from "os";
+/* import { type } from "os";
 import chalk from "chalk";
+const { bot } = require("../bot.ts")
+export async function checks():null {
 
-export function checks(): null {
   return null;
 }
+ */
