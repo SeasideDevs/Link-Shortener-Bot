@@ -1,6 +1,6 @@
 import { type } from "os";
 
-export function checks(): null {
+export function checks() {
   // Placeholder
   return null;
 }
