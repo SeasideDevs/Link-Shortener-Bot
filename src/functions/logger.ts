@@ -13,35 +13,30 @@ export function log(msg: string, data: LoggerOptions): TypeError | null {
   const loggers = [
     {
       name: "fatal",
-      friendlyName: "Fatal Error",
       log: () => {
         console.log(chalk.redBright("FATAL ERROR"), msg);
       },
     },
     {
       name: "info",
-      friendlyName: "Information",
       log: () => {
         console.log(chalk.whiteBright("INFO"), msg);
       },
     },
     {
       name: "error",
-      friendlyName: "Regular Error",
       log: () => {
         console.log(chalk.redBright("ERROR", msg));
       },
     },
     {
       name: "success",
-      friendlyName: "Success",
       log: () => {
         console.log(chalk.greenBright("SUCCESS"), msg);
       },
     },
     {
       name: "shard",
-      friendlyName: "Shard Info",
       log: () => {
         console.log(chalk.magentaBright("SHARD"), msg);
       },
