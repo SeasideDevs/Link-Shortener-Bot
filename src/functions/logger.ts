@@ -41,6 +41,12 @@ export function log(msg: string, data: LoggerOptions): TypeError | null {
         console.log(chalk.magentaBright("SHARD"), msg);
       },
     },
+    {
+      name: "warn",
+      log: () => {
+        console.log(chalk.yellowBright("WARN"), msg);
+      },
+    },
   ];
 
   const validTypes = loggers.map((logger) => {
