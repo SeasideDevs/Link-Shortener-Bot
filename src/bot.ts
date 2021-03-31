@@ -5,6 +5,4 @@ const bot = new Client({
   ws: { intents: ["GUILDS", "GUILD_MESSAGES"] },
 });
 
-bot.login(process.env.TOKEN);
-
-export { bot };
+bot.login();
