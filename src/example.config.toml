@@ -5,3 +5,5 @@ prefixes = ["prefix0", "prefix1", "prefix2"]
 main = "4fc1e9"
 warn = "fd6868"
 error = "fd6868"
+[client]
+intents = ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES",]

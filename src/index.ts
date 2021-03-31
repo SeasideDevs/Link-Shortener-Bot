@@ -9,6 +9,4 @@ const manager = new ShardingManager(__dirname + "/bot.js", {
   token: process.env.TOKEN,
 });
 
-manager.spawn();
-
-export { config }
+manager.spawn();g
