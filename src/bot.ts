@@ -7,5 +7,7 @@ const bot = new Client({
     intents: config.client.intents,
   },
 });
+import { log } from "./functions/logger";
+log("test", { type: "fatal" });
 
 bot.login();

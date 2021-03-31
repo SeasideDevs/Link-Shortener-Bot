@@ -1,8 +1,8 @@
 import chalk from "chalk";
 type LoggerOptions = {
-  type: "fatal" | "info" | "error" | "success" | "shard" | "importantinfo";
+  type: "fatal" | "info" | "error" | "success" | "shard";
 };
-export function log(msg: string, data: LoggerOptions): any {
+export function log(msg: string, data: LoggerOptions): TypeError | null {
   if (!msg) {
     return new TypeError("No message provided.");
   }
@@ -15,7 +15,7 @@ export function log(msg: string, data: LoggerOptions): any {
       name: "fatal",
       friendlyName: "Fatal Error",
       log: () => {
-        console.log(chalk.bgRedBright("FATAL ERROR"), msg);
+        console.log(chalk.redBright("FATAL ERROR"), msg);
       },
     },
     {
@@ -43,20 +43,15 @@ export function log(msg: string, data: LoggerOptions): any {
       name: "shard",
       friendlyName: "Shard Info",
       log: () => {
-        console.log(chalk.magentaBright("SHARD INFO"), msg);
-      },
-    },
-    {
-      name: "importantinfo",
-      friendlyName: "Important Info",
-      log: () => {
-        console.log(chalk.bgBlueBright("IMPORTANT INFO"), msg);
+        console.log(chalk.magentaBright("SHARD"), msg);
       },
     },
   ];
 
-  const validTypes = loggers.map((logger) => logger.name);
+  const validTypes = loggers.map((logger) => {
+    return logger.name;
+  });
   const logData = validTypes.indexOf(data.type);
-  loggers[logData].log()
+  loggers[logData].log();
   return null;
 }
