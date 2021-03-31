@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "bash scripts/build.sh && node build/index.js"
+    "start": "npx tsc && node build/index.js"
   },
   "repository": {
     "type": "git",
