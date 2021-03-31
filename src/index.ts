@@ -9,4 +9,4 @@ const manager = new ShardingManager(__dirname + "/bot.js", {
   token: process.env.TOKEN,
 });
 
-manager.spawn();g
+manager.spawn();
