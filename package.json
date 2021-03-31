@@ -34,6 +34,7 @@
     "chalk": "^4.1.0",
     "discord.js": "^12.5.1",
     "erlpack": "github:discord/erlpack",
+    "prompt": "^1.1.0",
     "utf-8-validate": "^5.0.4"
   }
 }
