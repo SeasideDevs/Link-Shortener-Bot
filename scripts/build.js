@@ -11,6 +11,13 @@ const success = (msg) => {
   console.log(chalk.greenBright("SUCCESS"), msg);
 };
 
+const info = (msg) => {
+  if (!msg) {
+    throw new TypeError("Missing parameter 'variable'");
+  }
+  console.log(chalk.magentaBright("INFO"), msg);
+};
+
 const warn = (msg) => {
   if (!msg) {
     throw new TypeError("Missing parameter 'variable'");
@@ -31,7 +38,7 @@ if (!existsSync("build")) {
   success("Created build folder");
 }
 
-if (!existsSync("../build.config.toml")) {
+if (existsSync("build/config.toml")) {
   error(
     "The config.toml file already exists in the build folder! Do you want to update it?"
   );
