@@ -12,12 +12,6 @@ export function log(msg: string, data: LoggerOptions): TypeError | null {
 
   const loggers = [
     {
-      name: "fatal",
-      log: () => {
-        console.log(chalk.redBright("FATAL ERROR"), msg);
-      },
-    },
-    {
       name: "info",
       log: () => {
         console.log(chalk.whiteBright("INFO"), msg);
