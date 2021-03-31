@@ -8,6 +8,5 @@ const bot = new Client({
   },
 });
 import { log } from "./functions/logger";
-log("test", { type: "fatal" });
 
 bot.login();
