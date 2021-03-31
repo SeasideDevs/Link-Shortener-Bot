@@ -7,3 +7,6 @@ const manager = new ShardingManager(__dirname + "/bot.js", {
 });
 
 manager.spawn();
+manager.on("shardCreate", (shard) => {
+  log(`Shard ${shard.id} Launched`, { type: "shard" });
+});
