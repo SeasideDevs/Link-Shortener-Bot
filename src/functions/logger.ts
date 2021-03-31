@@ -1,6 +1,6 @@
 import chalk from "chalk";
 type LoggerOptions = {
-  type: "fatal" | "info" | "error" | "success" | "shard";
+  type: "info" | "error" | "success" | "shard" | "warn";
 };
 export function log(msg: string, data: LoggerOptions): TypeError | null {
   if (!msg) {
@@ -46,6 +46,9 @@ export function log(msg: string, data: LoggerOptions): TypeError | null {
   const validTypes = loggers.map((logger) => {
     return logger.name;
   });
+  if (!validTypes.includes(data.type)) {
+    throw new TypeError("Invalid type for log type");
+  }
   const logData = validTypes.indexOf(data.type);
   loggers[logData].log();
   return null;
