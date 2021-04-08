@@ -14,5 +14,7 @@ jobs:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Run linter
-        run: npx eslint
+      - name: Install ESLint
+        run: npm i eslint
+      - name: Run ESLint
+        run: eslint
