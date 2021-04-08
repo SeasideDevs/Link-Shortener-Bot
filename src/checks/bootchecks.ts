@@ -26,5 +26,13 @@ export async function checks() {
       exit(9);
     }
   }
+  // Check if the owner_ids field has anything if not exit
+  if (!config.basic.prefixes.length) {
+    log("The prefix field has no ID's", {
+      type: "error",
+    });
+    exit(9);
+  }
+
   return null;
 }
