@@ -20,7 +20,7 @@ export function log(msg: string, data: LoggerOptions): TypeError | null {
     {
       name: "error",
       log: () => {
-        console.log(chalk.redBright("ERROR", msg));
+        console.log(chalk.redBright("ERROR"), msg);
       },
     },
     {
