@@ -11,7 +11,7 @@ export async function checks() {
     log("The owner field has no ID's", {
       type: "error",
     });
-    process.exit();
+    process.exit(9);
   }
   return null;
 }
