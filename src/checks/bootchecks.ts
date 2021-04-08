@@ -7,7 +7,7 @@ export async function checks() {
     process.exit(code);
   };
   // Check if the owner_ids field has anything if not exit
-  if (!config.basic.owner_ids.size) {
+  if (!config.basic.owner_ids.length) {
     log("The owner field has no ID's", {
       type: "error",
     });
