@@ -1,3 +1,5 @@
+import { checks } from "./checks/bootchecks";
+checks();
 import { parseConfig } from "./functions/parse";
 // Parse the config using the parseConfig() function
 const config = parseConfig();
