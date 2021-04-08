@@ -1,4 +1,5 @@
 import { log } from "../functions/logger";
+import { userID } from "../statics/regex";
 import { parseConfig } from "../functions/parse";
 const config = parseConfig();
 export async function checks() {
@@ -11,7 +12,18 @@ export async function checks() {
     log("The owner field has no ID's", {
       type: "error",
     });
-    process.exit(9);
+    exit(9);
+  }
+  for (const owner of config.basic.owner_ids) {
+    if (!userID.test(owner)) {
+      log(
+        "Owner ID does not seem to be a proper ID. Please enter a valid user ID",
+        {
+          type: "error",
+        }
+      );
+      exit(9);
+    }
   }
   return null;
 }
