@@ -14,6 +14,7 @@ export async function checks() {
     });
     exit(9);
   }
+  // Loops though all the owners and checks if they match the userID regex if not exit
   for (const owner of config.basic.owner_ids) {
     if (!userID.test(owner)) {
       log(
