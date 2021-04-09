@@ -12,9 +12,7 @@ module.exports = {
     msg.delete();
     const id = args[0];
     if (id.length !== 18) {
-      return msg.channel.send(
-        `you're the fucking owner you should know how ids work`
-      );
+      return msg.channel.send(`Invalid ID`);
     }
     const rawMessage = msg.content.replace(`${prefix}imitate `, ``);
     const message = rawMessage.replace(id, ``);

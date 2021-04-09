@@ -30,10 +30,7 @@ const status = {
   status: "online",
 };
 const chalk = require("chalk");
-//const blapi = require("blapi");
 const logger = require("./functions/logger.js");
-
-//blapi.handle(client, apikeys, 120)
 
 // Makes a new collection with all the files in /commands
 
@@ -193,7 +190,19 @@ client.on("message", async (msg) => {
     }
   }
 
-  if (msg.content === `<@!${client.user.id}>`) {
+  if (
+    msg.content.startsWith(`<@!${client.user.id}>`) ||
+    (msg.content.startsWith(`<@${client.user.id}>`) && !msg.author.bot)
+  ) {
+    if (!msg.channel.permissionsFor(client.user.id).has("SEND_MESSAGES")) {
+      try {
+        return msg.author.send(
+          `Hey, ${client.user.username} here! I'm here because you mentioned me in <#${msg.channel.id}>. I'm unable to send messages there so I can't respond to commands there!`
+        );
+      } catch (e) {
+        console.log(e);
+      }
+    }
     msg.channel.send(
       `Hey I'm ${client.user.username}! My prefix here is **${guildPrefix}**`
     );

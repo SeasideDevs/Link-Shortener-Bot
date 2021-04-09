@@ -59,7 +59,7 @@ module.exports = {
         `https://cdn.discordapp.com/emojis/${emote.id}.png`,
         emote.name,
         {
-          reason: `Created with ${client.user.tag} using the steal command. This command was run by ${msg.author.tag}(${msg.author.id})`,
+          reason: `Steal command run by ${msg.author.tag}(${msg.author.id})`,
         }
       );
     }
@@ -69,7 +69,7 @@ module.exports = {
         `https://cdn.discordapp.com/emojis/${emote.id}.gif`,
         emote.name,
         {
-          reason: `Created with ${client.user.tag} using the steal command. This command was run by ${msg.author.tag}(${msg.author.id})`,
+          reason: `Steal command run by ${msg.author.tag}(${msg.author.id})`,
         }
       );
     }
